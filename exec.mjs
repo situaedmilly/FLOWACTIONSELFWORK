@@ -10,7 +10,7 @@ if (!requestPath) throw new Error("ACTIONSELF_REQUEST_REQUIRED");
 const request = JSON.parse(readFileSync(resolve(requestPath), "utf8"));
 const required = [
   "request_type","target_ref","location_hint","frequency",
-  "issuer_ref","authority_ref","job_type","payload_ref","nonce","signature"
+  "issuer_ref","authority_ref","action_ref","job_type","payload_ref","nonce","signature"
 ];
 for (const field of required) {
   if (!request[field]) throw new Error("ACTIONSELF_FIELD_REQUIRED:" + field);
@@ -39,6 +39,33 @@ if (!verify(null, Buffer.from(canonical, "utf8"), publicKeyPem, signature)) {
 const startedAt = new Date().toISOString();
 const executionDigest = createHash("sha256").update(canonical, "utf8").digest("hex");
 
+if (request.action_ref !== "ACTUATIONSELF/DETERMINISTIC_BUILD") {
+  throw new Error("ACTIONSELF_ACTION_REJECTED");
+}
+
+if (request.job_type !== "DETERMINISTIC_BUILD") {
+  throw new Error("ACTUATIONSELF_ADAPTER_NOT_IMPLEMENTED");
+}
+
+const effect = {
+  effect_type: "EFFECTSELF",
+  version: "ACTIONSELF/0.1",
+  target_ref: request.target_ref,
+  action_ref: request.action_ref,
+  job_type: request.job_type,
+  state_delta: {
+    before: "ABSENT",
+    after: "ACTIONSELF-LIVE-WITNESS-V0.1"
+  },
+  result: "DETERMINISTIC_BUILD_EXECUTED",
+  external_effect: false
+};
+
+mkdirSync(resolve(root, "runtime/effects"), { recursive: true });
+const effectBytes = Buffer.from(JSON.stringify(effect, null, 2) + "\n", "utf8");
+writeFileSync(resolve(root, "runtime/effects/last-effect.json"), effectBytes);
+
+const effectDigest = createHash("sha256").update(effectBytes).digest("hex");
 mkdirSync(resolve(root, "runtime/receipts"), { recursive: true });
 const receipt = {
   receipt_type: "ExecutionReceipt",
@@ -46,13 +73,16 @@ const receipt = {
   target_ref: request.target_ref,
   issuer_ref: request.issuer_ref,
   authority_ref: request.authority_ref,
+  action_ref: request.action_ref,
   job_type: request.job_type,
   nonce: request.nonce,
   started_at: startedAt,
   completed_at: new Date().toISOString(),
-  result: "ADMITTED_FOR_TYPED_EXECUTION",
+  result: "EXECUTED_AND_EFFECT_OBSERVED",
+  actuation_executed: true,
   external_effect: false,
-  execution_sha256: executionDigest
+  execution_sha256: executionDigest,
+  effect_sha256: effectDigest
 };
 
 writeFileSync(resolve(root, "runtime/receipts/last-execution-receipt.json"), JSON.stringify(receipt, null, 2) + "\n", "utf8");
@@ -60,6 +90,8 @@ writeFileSync(resolve(root, "runtime/receipts/last-execution-receipt.json"), JSO
 console.log("ACTIONSELF=ADMITTED");
 console.log("SIGNATURE=VERIFIED");
 console.log("AUTHORITY=BOUND");
-console.log("JOB_TYPE=" + request.job_type);
+console.log("ACTUATIONSELF=EXECUTED");
+console.log("EFFECTSELF=OBSERVED");
+console.log("EFFECT_SHA256=" + effectDigest);
 console.log("EXTERNAL_EFFECT=false");
-console.log("RECEIPTSELF=WRITTEN");
+console.log("RECEIPTSELF=PROVEN");
