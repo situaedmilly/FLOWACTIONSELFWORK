@@ -11,7 +11,7 @@ action://ourself.ecosystem/{owner}/{repo}@{instance_hash}#{surface}
 The coordinate establishes an execution surface reference. It does not grant authority.
 
 Every ACTION_DISPATCH request MUST contain:
-request_type, target_ref, location_hint, frequency, issuer_ref, authority_ref, job_type, payload_ref, nonce.
+request_type, target_ref, location_hint, frequency, issuer_ref, authority_ref, action_ref, job_type, payload_ref, nonce.
 
 location_hint routes the request.
 frequency specifies cadence.
@@ -30,6 +30,8 @@ ir_version, job_type, target_ref, instructions, inputs.
 Instructions are data until an explicit job adapter admits them. They are never arbitrary shell by default.
 
 A successful run produces ExecutionReceipt with:
-receipt_type, target_ref, issuer_ref, authority_ref, job_type, nonce, started_at, completed_at, result, external_effect, execution_sha256.
+receipt_type, target_ref, issuer_ref, authority_ref, action_ref, job_type, nonce, started_at, completed_at, result, actuation_executed, external_effect, execution_sha256, effect_sha256.
+
+For the DETERMINISTIC_BUILD witness adapter, ACTIONSELF admits the typed job, ACTUATIONSELF performs one deterministic local state write, EFFECTSELF observes the resulting bytes, and RECEIPTSELF binds the observed effect by SHA-256.
 
 A receipt is evidence of observed execution. It is not authority.
