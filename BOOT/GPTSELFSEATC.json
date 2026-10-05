@@ -1,0 +1,19 @@
+{
+  "seat_id":"GPTSELFSEATC",
+  "runtime_id":"GPTSELF-C",
+  "role":"DESIGNATED_EXECUTOR",
+  "boot_protocol":"PULL-0003",
+  "action_repo":"situaedmilly/FLOWACTIONSELFWORK",
+  "input_repo":"situaedmilly/Cognitive-Transmutation-Core",
+  "input_ref":"selfgraph-gate-0003-pull-0003",
+  "dispatch_id":"DISPATCH-0003",
+  "pull_id":"PULL-0003",
+  "gate_id":"GATE-0003",
+  "status":"BOOT_REQUESTED",
+  "authority":"EXPLICIT_USER_EXECUTION_REQUEST",
+  "execution_boundary":"BOOT_RECORD_DOES_NOT_ASSERT_EXECUTION",
+  "required_runtime_capabilities":["RECEIVE","BIND","EXECUTE","PUSH","RECORD_RECEIPT"],
+  "required_outputs":["PUSH-0003","EFFECT-0004","GATE-COMPLETION-0003","EXECUTION_RECEIPT"],
+  "post_execution_verification":["THIRD-EYE_RECONTACT","REMOTE_BYTE_FETCH","BYTE_MATCH","VERIFIED_PUSH"],
+  "next_branch":"SELFGRAPH-BRANCH-0004"
+}
