@@ -1,6 +1,9 @@
 name: ACTIONSELF causal proof
 
 on:
+  push:
+    branches:
+      - feat/actionself-v0.1
   repository_dispatch:
     types: [ACTION_DISPATCH]
   workflow_dispatch:
@@ -17,3 +20,12 @@ jobs:
         with:
           node-version: 22
       - run: node --test tests/actionself.test.mjs
+      - name: Execute deterministic ActionSELF witness
+        run: node --test tests/live-action-witness.mjs
+      - name: Upload causal witness
+        uses: actions/upload-artifact@v4
+        with:
+          name: actionself-live-witness
+          path: |
+            runtime/effects/last-effect.json
+            runtime/receipts/last-execution-receipt.json
