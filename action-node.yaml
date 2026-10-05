@@ -6,7 +6,7 @@ action_manifest:
   location_hint: SELFVEREIGN-ADDRESSELF
   frequency: ON_DEMAND
   compute_substrate:
-    runner_type: "ephemeral-sandbox-container"
+    runner_type: "OURSELF_ACTION_NODE"
     max_execution_window_sec: 300
     allowed_mutations:
       - COGNITIVE_STATE_MUTATION
@@ -25,6 +25,8 @@ action_manifest:
     external_effect_default: false
     arbitrary_shell: false
     arbitrary_network: false
+    execution_authority_surface: "OURSELF_ACTION_RUNNER"
+    github_actions_execution: false
   receipt:
     type: "ExecutionReceipt"
     surface: "runtime/receipts/last-execution-receipt.json"
