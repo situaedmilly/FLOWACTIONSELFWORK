@@ -1,0 +1,30 @@
+action_manifest:
+  version: "ACTIONSELF/0.1"
+  sovereign_id: "did:ourself:action:situaedmilly:flowactionselfwork"
+  execution_coordinate: "action://ourself.ecosystem/situaedmilly/FLOWACTIONSELFWORK@INSTANCE#job-pipeline"
+  request_type: ACTION_DISPATCH
+  location_hint: SELFVEREIGN-ADDRESSELF
+  frequency: ON_DEMAND
+  compute_substrate:
+    runner_type: "ephemeral-sandbox-container"
+    max_execution_window_sec: 300
+    allowed_mutations:
+      - COGNITIVE_STATE_MUTATION
+      - REVERSELF_SIGNAL_TRANSPORT
+  security_membrane:
+    admit_script: "exec.mjs"
+    require_signature_verification: true
+    authorized_issuers:
+      - "did:ourself:repo:situaedmilly:SELFVEREIGN-ADDRESSELF"
+  execution_policy:
+    default: DENY
+    allowed_job_types:
+      - DETERMINISTIC_BUILD
+      - STATE_MIGRATION
+      - AGENT_REASONING
+    external_effect_default: false
+    arbitrary_shell: false
+    arbitrary_network: false
+  receipt:
+    type: "ExecutionReceipt"
+    surface: "runtime/receipts/last-execution-receipt.json"
