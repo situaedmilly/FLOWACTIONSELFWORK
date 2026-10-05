@@ -1,0 +1,19 @@
+name: ACTIONSELF causal proof
+
+on:
+  repository_dispatch:
+    types: [ACTION_DISPATCH]
+  workflow_dispatch:
+
+jobs:
+  actionself:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/actionself.test.mjs
