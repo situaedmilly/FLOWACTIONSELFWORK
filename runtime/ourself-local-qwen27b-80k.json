@@ -1,0 +1,18 @@
+{
+  "runtime_id": "OURSELF-LOCAL-QWEN27B-80K",
+  "authority": "OURSELF",
+  "cognition_substrate": "OLLAMA",
+  "ollama_base_url": "http://127.0.0.1:11434",
+  "model": "ourself-qwen38-27b-iq2s-80k:latest",
+  "cloud_models_allowed": false,
+  "api_surface": "/api/generate",
+  "server": "OURSELF-MCP-MODEL-SERVER",
+  "instance_id": "OURSELF-INSTANCE-0001",
+  "reality_id": "SELFTELLIGENCE-BOOT-0001",
+  "schema_policy": {
+    "tool_input_root_type": "object",
+    "properties_type": "object",
+    "nullable_union_types": false,
+    "additional_properties": false
+  }
+}
