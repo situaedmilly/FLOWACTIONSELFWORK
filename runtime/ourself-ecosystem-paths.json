@@ -5,11 +5,21 @@
   "model_target": "ourself-qwen38-27b-iq2s-80k:latest",
   "ollama_role": "RETIRED",
   "cloud_model": false,
-  "runtime_state": "LIVE_LOCAL_PROCESS",
-  "realized_endpoint": "http://192.168.12.112:3000",
+  "runtime_state": "DECLARED_AWAITING_HOST_BOOT",
+  "realized_endpoint": "ENV:GENESIS_ENDPOINT",
   "cognition_substrate": "OLLAMA",
-  "cognitive_endpoint": "http://192.168.12.112:11434/v1",
+  "cognitive_endpoint": "ENV:OURSELF_COGNITION_BASE_URL",
   "context_window": 80000,
   "cognitive_transport": "OPENAI_COMPATIBLE",
-  "runtime_status": "LIVE_LOCAL_PROCESS"
+  "runtime_status": "LIVE_LOCAL_PROCESS",
+  "canonical_server": {
+    "server_id": "ALCHEMYSELFRVER01",
+    "instance_id": "ALCHEMYSELFRVER01",
+    "authority": "OURSELF",
+    "cognition_substrate": "GENESIS_LLAMA_SERVER",
+    "model_target": "GENESIS_MODEL_ID_FROM_SERVER"
+  },
+  "model_artifact_local_to_mac": false,
+  "genesis_repository": "situaedmilly/ourself-cloud-server-network",
+  "execution_entrypoint": "/Users/millysituated/OURSELF/FLOWACTIONSELFWORK/runtime/alchemyselfrver01-boot.mjs"
 }
