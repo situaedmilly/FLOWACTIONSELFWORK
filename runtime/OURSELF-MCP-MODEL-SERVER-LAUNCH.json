@@ -1,0 +1,21 @@
+{
+  "launch_id": "OURSELF-MCP-MODEL-LAUNCH-0001",
+  "instance_id": "OURSELF-INSTANCE-0001",
+  "server_id": "OURSELF-SERVER-0001",
+  "executor_repo": "situaedmilly/FLOWACTIONSELFWORK",
+  "address_repo": "situaedmilly/SELFVEREIGN-ADDRESSELF",
+  "cognition_repo": "situaedmilly/Cognitive-Transmutation-Core",
+  "process": "runtime/ourself-mcp-model-server.mjs",
+  "transport": "STREAMABLE_HTTP",
+  "listen_port": 3000,
+  "mcp_path": "/mcp",
+  "health_path": "/health",
+  "model_authority": "OURSELF_MODEL_ROUTER",
+  "model_substrate": "OLLAMA",
+  "model_selector": "OURSELF_MODEL",
+  "requested_model_profile": "QWEN_27B_80K_LOCAL",
+  "ollama_base_url_env": "OLLAMA_BASE_URL",
+  "status": "READY_TO_BOOT",
+  "execution_claim": false,
+  "required_witness": ["PROCESS_LISTENING","MCP_INITIALIZE_SUCCESS","TOOLS_LIST_SUCCESS","LOCAL_MODEL_RESOLUTION","MODEL_INFERENCE_SUCCESS","MCP_MODEL_ROUNDTRIP","SELFGRAPH_RECEIPT"]
+}
