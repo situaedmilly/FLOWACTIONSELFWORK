@@ -8,6 +8,12 @@ import { createSelfThought, verifyThoughtBytes } from "/Users/millysituated/OURS
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || modelRuntime.ollama_base_url || "http://127.0.0.1:11434";
+if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):11434$/.test(OLLAMA_BASE_URL)) {
+  throw new Error(`NONLOCAL_OLLAMA_FORBIDDEN: ${OLLAMA_BASE_URL}`);
+}
+if (modelRuntime.cloud_models_allowed !== false) {
+  throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
+}
 const REPO_ROOT = "/Users/millysituated/OURSELF";
 const PATHS_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-ecosystem-paths.json");
 const MODEL_RUNTIME_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-local-qwen27b-80k.json");
