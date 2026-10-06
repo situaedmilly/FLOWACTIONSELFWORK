@@ -50,7 +50,7 @@ const tools = [
   {
     name: "ourself_health",
     description: "Return OURSELF cognitive server state.",
-    inputSchema: { type: "object", properties: {}, additionalProperties: false }
+    inputSchema: { type: "object", properties: {} }
   },
   {
     name: "ourself_selftell",
@@ -61,8 +61,7 @@ const tools = [
         prompt: { type: "string", minLength: 1 },
         causal_parent: { type: ["string", "null"] }
       },
-      required: ["prompt"],
-      additionalProperties: false
+      required: ["prompt"]
     }
   },
   {
@@ -71,8 +70,7 @@ const tools = [
     inputSchema: {
       type: "object",
       properties: { prompt: { type: "string", minLength: 1 } },
-      required: ["prompt"],
-      additionalProperties: false
+      required: ["prompt"]
     }
   }
 ];
