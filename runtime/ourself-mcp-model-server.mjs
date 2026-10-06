@@ -7,13 +7,14 @@ import { createSelfThought, verifyThoughtBytes } from "/Users/millysituated/OURS
 
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
-const LLAMA_BASE_URL = process.env.OURSELF_LLAMA_BASE_URL || modelRuntime.llama_base_url || "http://127.0.0.1:8080";
-if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):8080$/.test(LLAMA_BASE_URL)) {
-  throw new Error(`NONLOCAL_LLAMA_FORBIDDEN: ${LLAMA_BASE_URL}`);
+const COGNITION_BASE_URL = process.env.OURSELF_COGNITION_BASE_URL || modelRuntime.llama_base_url || "http://127.0.0.1:8080";
+if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):8080$/.test(COGNITION_BASE_URL)) {
+  throw new Error(`NONLOCAL_LLAMA_FORBIDDEN: ${COGNITION_BASE_URL}`);
 }
 if (modelRuntime.cloud_models_allowed !== false) {
   throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
 }
+const COGNITION_BASE_URL_ENV = process.env.OURSELF_COGNITION_BASE_URL;
 const REPO_ROOT = "/Users/millysituated/OURSELF";
 const PATHS_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-ecosystem-paths.json");
 const MODEL_RUNTIME_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-local-qwen27b-80k.json");
@@ -24,6 +25,11 @@ try { config = JSON.parse(fs.readFileSync(PATHS_FILE, "utf8")); }
 catch (e) { console.error(JSON.stringify({ event: "CONFIG_LOAD_ERROR", error: e.message })); }
 try { modelRuntime = JSON.parse(fs.readFileSync(MODEL_RUNTIME_FILE, "utf8")); }
 catch (e) { throw new Error("MODEL_RUNTIME_CONFIG_REQUIRED: " + e.message); }
+
+const COGNITION_BASE_URL = COGNITION_BASE_URL_ENV || modelRuntime.cognitive_endpoint || modelRuntime.llama_base_url;
+if (!/^https?:\/\/192\.168\.12\.112:11434\/v1$/.test(COGNITION_BASE_URL)) {
+  throw new Error(`COGNITION_ENDPOINT_MISMATCH: ${COGNITION_BASE_URL}`);
+}
 
 const launch = config.launch_realm || {};
 const CANONICAL_MODEL = modelRuntime.model || config.canonical_server?.model_target || "ourself-qwen38-27b-iq2s-80k:latest";
@@ -103,7 +109,7 @@ const tools = [
 assertStrictToolSchemas(tools);
 
 async function llama(route, init = {}) {
-  const response = await fetch(LLAMA_BASE_URL + route, init);
+  const response = await fetch(COGNITION_BASE_URL + route, init);
   const text = await response.text();
   if (!response.ok) throw new Error(`LLAMA_HTTP_${response.status}: ${text}`);
   return text ? JSON.parse(text) : {};
@@ -160,7 +166,7 @@ async function selfTell(sessionId, prompt, causalParent = null) {
     reality_id: REALITY_ID,
     model_ref: OURSELF_MODEL,
     cognition_authority: "OURSELF",
-    cognition_substrate: "LLAMA_CPP",
+    cognition_substrate: "OLLAMA",
     artifact: "SELFTHOUGHT",
     thought_hash: thought.thought_hash,
     status: "RECORDED",
@@ -210,7 +216,7 @@ async function dispatch(message) {
             status: "LISTENING",
             cognitive_layer: "SELFTELLIGENCE",
             model_authority: "OURSELF_MODEL_ROUTER",
-            model_substrate: "LLAMA_CPP",
+            model_substrate: "OLLAMA",
             model: OURSELF_MODEL,
             selfthought_runtime: "Cognitive-Transmutation-Core/src/selfthought.mjs",
             active_sessions: sessions.size,
@@ -245,7 +251,7 @@ const server = http.createServer(async (req, res) => {
       status: "LISTENING",
       cognitive_layer: "SELFTELLIGENCE",
       model_router: "OURSELF",
-      model_substrate: "LLAMA_CPP",
+      model_substrate: "OLLAMA",
       model: OURSELF_MODEL
     }));
     return;
