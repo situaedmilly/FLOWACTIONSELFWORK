@@ -7,9 +7,9 @@ import { createSelfThought, verifyThoughtBytes } from "/Users/millysituated/OURS
 
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
-const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || modelRuntime.ollama_base_url || "http://127.0.0.1:11434";
-if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):11434$/.test(OLLAMA_BASE_URL)) {
-  throw new Error(`NONLOCAL_OLLAMA_FORBIDDEN: ${OLLAMA_BASE_URL}`);
+const LLAMA_BASE_URL = process.env.OURSELF_LLAMA_BASE_URL || modelRuntime.llama_base_url || "http://127.0.0.1:8080";
+if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):8080$/.test(LLAMA_BASE_URL)) {
+  throw new Error(`NONLOCAL_LLAMA_FORBIDDEN: ${LLAMA_BASE_URL}`);
 }
 if (modelRuntime.cloud_models_allowed !== false) {
   throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
@@ -102,11 +102,26 @@ const tools = [
 
 assertStrictToolSchemas(tools);
 
-async function ollama(route, init = {}) {
-  const response = await fetch(OLLAMA_BASE_URL + route, init);
+async function llama(route, init = {}) {
+  const response = await fetch(LLAMA_BASE_URL + route, init);
   const text = await response.text();
-  if (!response.ok) throw new Error(`OLLAMA_HTTP_${response.status}: ${text}`);
+  if (!response.ok) throw new Error(`LLAMA_HTTP_${response.status}: ${text}`);
   return text ? JSON.parse(text) : {};
+}
+
+async function llamaChat(messages) {
+  return llama("/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "authorization": "Bearer sk-local-ourself"
+    },
+    body: JSON.stringify({
+      model: OURSELF_MODEL,
+      messages,
+      stream: false
+    })
+  });
 }
 
 async function selfTell(sessionId, prompt, causalParent = null) {
@@ -114,17 +129,10 @@ async function selfTell(sessionId, prompt, causalParent = null) {
   const actimanirunId = "ACTIMANIRUN-" + crypto.randomUUID();
   const thoughtBirthId = "BIRTH-" + crypto.randomUUID();
 
-  const modelResult = await ollama("/api/generate", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      model: OURSELF_MODEL,
-      prompt,
-      stream: false
-    })
-  });
-
-  const output = typeof modelResult.response === "string" ? modelResult.response : "";
+  const modelResult = await llamaChat([{ role: "user", content: prompt }]);
+  const output = typeof modelResult.choices?.[0]?.message?.content === "string"
+    ? modelResult.choices[0].message.content
+    : "";
   if (!output.length) throw new Error("COGNITIVE_OUTPUT_EMPTY");
 
   const thought = createSelfThought({
@@ -152,7 +160,7 @@ async function selfTell(sessionId, prompt, causalParent = null) {
     reality_id: REALITY_ID,
     model_ref: OURSELF_MODEL,
     cognition_authority: "OURSELF",
-    cognition_substrate: "OLLAMA",
+    cognition_substrate: "LLAMA_CPP",
     artifact: "SELFTHOUGHT",
     thought_hash: thought.thought_hash,
     status: "RECORDED",
@@ -202,7 +210,7 @@ async function dispatch(message) {
             status: "LISTENING",
             cognitive_layer: "SELFTELLIGENCE",
             model_authority: "OURSELF_MODEL_ROUTER",
-            model_substrate: "OLLAMA",
+            model_substrate: "LLAMA_CPP",
             model: OURSELF_MODEL,
             selfthought_runtime: "Cognitive-Transmutation-Core/src/selfthought.mjs",
             active_sessions: sessions.size,
@@ -237,7 +245,7 @@ const server = http.createServer(async (req, res) => {
       status: "LISTENING",
       cognitive_layer: "SELFTELLIGENCE",
       model_router: "OURSELF",
-      model_substrate: "OLLAMA",
+      model_substrate: "LLAMA_CPP",
       model: OURSELF_MODEL
     }));
     return;
