@@ -1,11 +1,48 @@
 import http from "node:http";
 import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import { execSync } from "node:child_process";
 
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434";
-const OURSELF_MODEL = process.env.OURSELF_MODEL || "qwen27b-local";
+
+// BOOTSTRAP: Load configuration from Repository Artifacts
+const REPO_ROOT = "/Users/millysituated/OURSELF";
+const PATHS_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-ecosystem-paths.json");
+
+let config = { model_target: "qwen27b-local" };
+try {
+  config = JSON.parse(fs.readFileSync(PATHS_FILE, "utf8"));
+} catch (e) {
+  console.error(JSON.stringify({ event: "CONFIG_LOAD_ERROR", error: e.message }));
+}
+
+const OURSELF_MODEL = process.env.OURSELF_MODEL || config.model_target;
 const MCP_PROTOCOL_VERSION = process.env.MCP_PROTOCOL_VERSION || "2025-06-18";
+
+// CRYPTOGRAPHIC BINDING: Resolve exact commit hashes of the 3-repo spine
+const getRepoHash = (repoDir) => {
+  try {
+    return execSync(`git -C ${path.join(REPO_ROOT, repoDir)} rev-parse HEAD`, { encoding: "utf8" }).trim();
+  } catch (e) {
+    return "UNRESOLVED";
+  }
+};
+
+const bootBinding = {
+  timestamp: new Date().toISOString(),
+  address_repo: getRepoHash("SELFVEREIGN-ADDRESSELF"),
+  execution_repo: getRepoHash("FLOWACTIONSELFWORK"),
+  cognition_repo: getRepoHash("Cognitive-Transmutation-Core"),
+  network_repo: getRepoHash("ourself-cloud-server-network"),
+  core_repo: getRepoHash("ourself-core"),
+  runtime_model: OURSELF_MODEL
+};
+
+console.log(JSON.stringify({ event: "OURSELF_BOOT_BINDING", binding: bootBinding }));
+
 
 const sessions = new Set();
 const tools = [
