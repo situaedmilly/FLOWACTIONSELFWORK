@@ -36,7 +36,7 @@ if (requestedModel !== CANONICAL_MODEL) {
 const OURSELF_MODEL = CANONICAL_MODEL;
 const MCP_PROTOCOL_VERSION = process.env.MCP_PROTOCOL_VERSION || "2025-06-18";
 const INSTANCE_ID = config.canonical_server?.instance_id || "OURSELF-INSTANCE-0001";
-const REALITY_ID = "SELFTELLIGENCE-BOOT-0001";
+const REALITY_ID = "REVERSELF_COGNITIVE_TRANSMUTATION";
 const SERVER_ID = config.canonical_server?.server_id || "OURSELF-MCP-MODEL-SERVER";
 
 const getRepoHash = repoDir => {
