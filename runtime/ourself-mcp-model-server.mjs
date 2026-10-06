@@ -74,7 +74,7 @@ const tools = [
   {
     name: "ourself_health",
     description: "Return OURSELF cognitive server state.",
-    inputSchema: { type: "object", properties: {} }
+    inputSchema: { type: "object", properties: {}, additionalProperties: false }
   },
   {
     name: "ourself_selftell",
