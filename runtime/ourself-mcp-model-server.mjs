@@ -28,12 +28,12 @@ if (modelRuntime.cloud_models_allowed !== false) {
 }
 
 const launch = config.launch_realm || {};
-const CANONICAL_MODEL = modelRuntime.model || config.canonical_server?.model_target || "ourself-qwen38-27b-iq2s-80k:latest";
+const CANONICAL_MODEL = process.env.OURSELF_MODEL || modelRuntime.model || config.canonical_server?.model_target;
 const requestedModel = process.env.OURSELF_MODEL || CANONICAL_MODEL;
-if (requestedModel !== CANONICAL_MODEL) {
-  throw new Error(`OURSELF_MODEL_MISMATCH: expected ${CANONICAL_MODEL}, received ${requestedModel}`);
+if (!requestedModel || requestedModel.startsWith("GENESIS_MODEL_ID")) {
+  throw new Error("OURSELF_MODEL_REQUIRED: set OURSELF_MODEL to the Genesis model id");
 }
-const OURSELF_MODEL = CANONICAL_MODEL;
+const OURSELF_MODEL = requestedModel;
 const MCP_PROTOCOL_VERSION = process.env.MCP_PROTOCOL_VERSION || "2025-06-18";
 const INSTANCE_ID = config.canonical_server?.instance_id || "OURSELF-INSTANCE-0001";
 const REALITY_ID = "REVERSELF_COGNITIVE_TRANSMUTATION";
@@ -212,7 +212,7 @@ async function dispatch(message) {
             status: "LISTENING",
             cognitive_layer: "SELFTELLIGENCE",
             model_authority: "OURSELF_MODEL_ROUTER",
-            model_substrate: "OLLAMA",
+            model_substrate: "GENESIS_LLAMA_SERVER",
             model: OURSELF_MODEL,
             selfthought_runtime: "Cognitive-Transmutation-Core/src/selfthought.mjs",
             active_sessions: sessions.size,
