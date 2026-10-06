@@ -31,4 +31,19 @@ llama-server \
 LLAMA_PID=$!
 trap 'kill "$LLAMA_PID" 2>/dev/null || true' EXIT
 
+READY=0
+for _ in $(seq 1 120); do
+  if curl -fsS http://127.0.0.1:8080/health >/dev/null 2>&1; then
+    READY=1
+    break
+  fi
+  sleep 1
+done
+
+if [ "$READY" -ne 1 ]; then
+  echo "LLAMA_SERVER_NOT_READY: see /tmp/ourself-llama-server.log" >&2
+  exit 1
+fi
+
+echo "LLAMA_SERVER_READY=1"
 exec node /Users/millysituated/OURSELF/FLOWACTIONSELFWORK/runtime/ourself-mcp-model-server.mjs
