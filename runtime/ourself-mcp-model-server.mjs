@@ -23,11 +23,6 @@ const COGNITION_BASE_URL = COGNITION_BASE_URL_ENV || modelRuntime.cognitive_endp
 if (!/^https?:\/\/192\.168\.12\.112:11434\/v1$/.test(COGNITION_BASE_URL)) {
   throw new Error(`COGNITION_ENDPOINT_MISMATCH: ${COGNITION_BASE_URL}`);
 }
-
-const COGNITION_BASE_URL = COGNITION_BASE_URL_ENV || modelRuntime.cognitive_endpoint || modelRuntime.llama_base_url;
-if (!/^https:\/\/192\.168\.12\.112:11434\/v1$/.test(COGNITION_BASE_URL)) {
-  throw new Error(`COGNITION_ENDPOINT_MISMATCH: ${COGNITION_BASE_URL}`);
-}
 if (modelRuntime.cloud_models_allowed !== false) {
   throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
 }
