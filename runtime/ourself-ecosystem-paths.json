@@ -5,7 +5,7 @@
   "model_target": "ourself-qwen38-27b-iq2s-80k:latest",
   "ollama_role": "RETIRED",
   "cloud_model": false,
-  "runtime_state": "DECLARED_AWAITING_HOST_BOOT",
+  "runtime_state": "LAUNCH_CONTRACT_MORPHED_FOR_EXPLICIT_COGNITION_CROSSING",
   "realized_endpoint": "ENV:GENESIS_ENDPOINT",
   "cognition_substrate": "OLLAMA",
   "cognitive_endpoint": "ENV:OURSELF_COGNITION_BASE_URL",
@@ -21,5 +21,24 @@
   },
   "model_artifact_local_to_mac": false,
   "genesis_repository": "situaedmilly/ourself-cloud-server-network",
-  "execution_entrypoint": "/Users/millysituated/OURSELF/FLOWACTIONSELFWORK/runtime/alchemyselfrver01-boot.mjs"
+  "execution_entrypoint": "/Users/millysituated/OURSELF/FLOWACTIONSELFWORK/runtime/alchemyselfrver01-boot.mjs",
+  "cognition_base_url_observed_target": "http://192.168.12.112:11434/v1",
+  "runtime_base_url_observed_target": "http://192.168.12.112:3000",
+  "launch_contract": {
+    "entrypoint": "runtime/alchemyselfrver01-boot.mjs",
+    "runtime_endpoint_env": "GENESIS_ENDPOINT",
+    "cognition_endpoint_env": "OURSELF_COGNITION_BASE_URL",
+    "model_env": "OURSELF_MODEL_ID",
+    "transport": "OPENAI_COMPATIBLE",
+    "required_sequence": [
+      "RESIDENT_RUNTIME_HEALTH",
+      "COGNITION_MODELS_OBSERVATION",
+      "ACTUAL_CHAT_COMPLETIONS_CROSSING",
+      "RESPONSE_OBSERVATION",
+      "RESPONSE_HASH",
+      "DURABLE_RECEIPT"
+    ],
+    "fallback_endpoint_forbidden": true,
+    "crossing_receipt_schema": "OURSELF-CROSSING-LAUNCH-RECEIPT-v0.2"
+  }
 }
