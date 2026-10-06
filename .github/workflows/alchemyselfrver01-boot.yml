@@ -1,0 +1,25 @@
+name: ALCHEMYSELFRVER01 Genesis Boot
+
+on:
+  workflow_dispatch:
+
+jobs:
+  genesis-boot:
+    runs-on: [self-hosted, linux, genesis]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Authorize Genesis boot
+        env:
+          GENESIS_AUTHORIZATION: OURSELF-AUTHORIZED-ALCHEMYSELFRVER01-BOOT-0001
+        run: test "$GENESIS_AUTHORIZATION" = "OURSELF-AUTHORIZED-ALCHEMYSELFRVER01-BOOT-0001"
+      - name: Execute Genesis runtime
+        env:
+          GENESIS_REPO_DIR: "$GITHUB_WORKSPACE"
+        run: node runtime/alchemyselfrver01-boot.mjs
+      - name: Publish execution receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALCHEMYSELFRVER01-boot-receipt
+          path: genesis/receipts/ALCHEMYSELFRVER01-latest.json
