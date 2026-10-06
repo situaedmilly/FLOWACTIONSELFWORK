@@ -6,8 +6,10 @@
   "ollama_role": "RETIRED",
   "cloud_model": false,
   "runtime_state": "LIVE_LOCAL_PROCESS",
-  "realized_endpoint": "http://127.0.0.1:3000",
-  "cognition_substrate": "LLAMA_CPP",
-  "cognitive_endpoint": "http://127.0.0.1:8080/v1",
-  "context_window": 80000
+  "realized_endpoint": "http://192.168.12.112:3000",
+  "cognition_substrate": "OLLAMA",
+  "cognitive_endpoint": "http://192.168.12.112:11434/v1",
+  "context_window": 80000,
+  "cognitive_transport": "OPENAI_COMPATIBLE",
+  "runtime_status": "LIVE_LOCAL_PROCESS"
 }
