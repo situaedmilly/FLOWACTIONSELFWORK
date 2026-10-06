@@ -7,13 +7,6 @@ import { createSelfThought, verifyThoughtBytes } from "/Users/millysituated/OURS
 
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
-const COGNITION_BASE_URL = process.env.OURSELF_COGNITION_BASE_URL || modelRuntime.llama_base_url || "http://127.0.0.1:8080";
-if (!/^https?:\\/\\/(127\\.0\\.0\\.1|localhost):8080$/.test(COGNITION_BASE_URL)) {
-  throw new Error(`NONLOCAL_LLAMA_FORBIDDEN: ${COGNITION_BASE_URL}`);
-}
-if (modelRuntime.cloud_models_allowed !== false) {
-  throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
-}
 const COGNITION_BASE_URL_ENV = process.env.OURSELF_COGNITION_BASE_URL;
 const REPO_ROOT = "/Users/millysituated/OURSELF";
 const PATHS_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-ecosystem-paths.json");
@@ -29,6 +22,14 @@ catch (e) { throw new Error("MODEL_RUNTIME_CONFIG_REQUIRED: " + e.message); }
 const COGNITION_BASE_URL = COGNITION_BASE_URL_ENV || modelRuntime.cognitive_endpoint || modelRuntime.llama_base_url;
 if (!/^https?:\/\/192\.168\.12\.112:11434\/v1$/.test(COGNITION_BASE_URL)) {
   throw new Error(`COGNITION_ENDPOINT_MISMATCH: ${COGNITION_BASE_URL}`);
+}
+
+const COGNITION_BASE_URL = COGNITION_BASE_URL_ENV || modelRuntime.cognitive_endpoint || modelRuntime.llama_base_url;
+if (!/^https:\/\/192\.168\.12\.112:11434\/v1$/.test(COGNITION_BASE_URL)) {
+  throw new Error(`COGNITION_ENDPOINT_MISMATCH: ${COGNITION_BASE_URL}`);
+}
+if (modelRuntime.cloud_models_allowed !== false) {
+  throw new Error("CLOUD_MODEL_POLICY_REQUIRED: cloud_models_allowed must be false");
 }
 
 const launch = config.launch_realm || {};
