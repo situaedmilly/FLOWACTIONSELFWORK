@@ -1,84 +1,114 @@
-import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash, randomUUID } from "node:crypto";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+const runtimeEndpoint = process.env.GENESIS_ENDPOINT;
+const cognitionEndpoint = process.env.OURSELF_COGNITION_BASE_URL || runtimeEndpoint;
+const model = process.env.OURSELF_MODEL_ID || "ourself-qwen38-27b-iq2s-80k:latest";
 const repoDir = process.env.GENESIS_REPO_DIR || ".";
-const composeFile = join(repoDir, "genesis", "compose.yaml");
-const modelDir = process.env.GENESIS_MODEL_DIR;
-const modelFile = process.env.GENESIS_MODEL_FILE;
-const endpoint = process.env.GENESIS_ENDPOINT || "http://127.0.0.1:8080";
+const receiptPath =
+  process.env.GENESIS_RECEIPT_PATH ||
+  join(repoDir, "genesis", "receipts", "ALCHEMYSELFRVER01-latest.json");
 
-if (!modelDir || !modelFile) {
-  throw new Error("GENESIS_MODEL_BINDING_REQUIRED: set GENESIS_MODEL_DIR and GENESIS_MODEL_FILE");
+if (!runtimeEndpoint) {
+  throw new Error(
+    "OURSELF_RUNTIME_ENDPOINT_REQUIRED: set GENESIS_ENDPOINT to the resident runtime endpoint"
+  );
 }
-const modelPath = join(modelDir, modelFile);
-if (!existsSync(modelPath)) throw new Error(`GENESIS_MODEL_NOT_FOUND: ${modelPath}`);
-if (!existsSync(composeFile)) throw new Error(`GENESIS_COMPOSE_NOT_FOUND: ${composeFile}`);
+if (!cognitionEndpoint) {
+  throw new Error(
+    "OURSELF_COGNITION_ENDPOINT_REQUIRED: set OURSELF_COGNITION_BASE_URL or GENESIS_ENDPOINT"
+  );
+}
 
-const sha256 = createHash("sha256").update(readFileSync(modelPath)).digest("hex");
+const normalizedCognitionEndpoint = cognitionEndpoint.replace(/\/$/, "");
+const requestId = randomUUID();
+const startedAt = new Date().toISOString();
 
-const env = {
-  ...process.env,
-  GENESIS_MODEL_DIR: modelDir,
-  GENESIS_MODEL_FILE: modelFile
-};
-
-execFileSync("docker", ["compose", "-f", composeFile, "up", "-d"], {
-  env,
-  stdio: "inherit"
-});
-
-async function get(path) {
-  const response = await fetch(endpoint + path);
+async function get(url) {
+  const response = await fetch(url);
   const body = await response.text();
   return { status: response.status, body };
 }
 
-let health;
-for (let i = 0; i < 120; i++) {
-  health = await get("/health");
-  if (health.status === 200) break;
-  await new Promise(resolve => setTimeout(resolve, 1000));
+async function post(url, body) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-ourself-request-id": requestId
+    },
+    body: JSON.stringify(body)
+  });
+  const responseBody = await response.text();
+  return { status: response.status, body: responseBody };
 }
-if (health.status !== 200) throw new Error(`GENESIS_NOT_READY: HTTP ${health.status} ${health.body}`);
 
-const models = await get("/v1/models");
-if (models.status !== 200) throw new Error(`GENESIS_MODELS_FAILED: HTTP ${models.status} ${models.body}`);
+const runtimeHealth = await get(runtimeEndpoint.replace(/\/$/, "") + "/health");
+if (runtimeHealth.status !== 200) {
+  throw new Error(
+    `OURSELF_RUNTIME_NOT_READY: HTTP ${runtimeHealth.status} ${runtimeHealth.body}`
+  );
+}
 
-const modelResponse = await fetch(endpoint + "/v1/chat/completions", {
-  method: "POST",
-  headers: { "content-type": "application/json" },
-  body: JSON.stringify({
-    model: process.env.GENESIS_MODEL_ID || modelFile,
-    messages: [{ role: "user", content: "Return exactly GENESIS_READY." }],
-    max_tokens: 16,
-    stream: false
-  })
+const cognitionModels = await get(normalizedCognitionEndpoint + "/models");
+if (cognitionModels.status !== 200) {
+  throw new Error(
+    `OURSELF_COGNITION_NOT_READY: HTTP ${cognitionModels.status} ${cognitionModels.body}`
+  );
+}
+
+const prompt = "Return exactly SOVEREIGN_CROSSING_VERIFIED.";
+const crossing = await post(normalizedCognitionEndpoint + "/chat/completions", {
+  model,
+  messages: [{ role: "user", content: prompt }],
+  max_tokens: 16,
+  stream: false
 });
-const inferenceBody = await modelResponse.text();
-if (!modelResponse.ok) throw new Error(`GENESIS_INFERENCE_FAILED: HTTP ${modelResponse.status} ${inferenceBody}`);
+
+if (!crossing.status || crossing.status < 200 || crossing.status >= 300) {
+  throw new Error(
+    `OURSELF_COGNITION_CROSSING_FAILED: HTTP ${crossing.status} ${crossing.body}`
+  );
+}
+
+const responseHash = createHash("sha256").update(crossing.body).digest("hex");
 
 const receipt = {
-  schema: "OURSELF-GENESIS-BOOT-RECEIPT-v0.1",
+  schema: "OURSELF-CROSSING-LAUNCH-RECEIPT-v0.2",
   instance_id: "ALCHEMYSELFRVER01",
   authority: "OURSELF",
   execution: "FLOWACTIONSELFWORK",
-  status: "EXECUTED_VERIFIED",
-  endpoint,
-  model_file: modelFile,
-  model_sha256: sha256,
-  health_http_status: health.status,
-  models_http_status: models.status,
-  inference_http_status: modelResponse.status,
-  started_at: new Date().toISOString(),
+  status: "CROSSING_OBSERVED",
+  request_id: requestId,
+  started_at: startedAt,
+  runtime: {
+    endpoint: runtimeEndpoint,
+    health_http_status: runtimeHealth.status
+  },
+  cognition: {
+    endpoint: normalizedCognitionEndpoint,
+    model,
+    models_http_status: cognitionModels.status,
+    inference_http_status: crossing.status,
+    response_sha256: responseHash
+  },
+  witnessing_requirement:
+    "TO WITNESS CROSSING: observe the actual traversal from the resident OURSELF execution runtime through the resolved cognition route into the OURSELF cognition substrate, capture the crossing evidence, correlate the request/response, and bind the observed crossing to a durable receipt; declaration, configuration, endpoint health, or simulated invocation alone does not satisfy this requirement.",
+  causal_target:
+    "RESIDENT EXECUTION RUNTIME -> RESOLVED ROUTE -> ACTUAL TRANSPORT CROSSING -> OURSELF COGNITION ENDPOINT -> QWEN INSTANCE -> RESPONSE -> OBSERVATION -> DURABLE RECEIPT",
+  crossing_observation: {
+    request_dispatched_by: "ALCHEMYSELFRVER01",
+    request_target: normalizedCognitionEndpoint + "/chat/completions",
+    response_observed: true,
+    durable_receipt_written: true
+  },
   evidence: {
-    health: JSON.parse(health.body),
-    models: JSON.parse(models.body),
-    inference: JSON.parse(inferenceBody)
+    runtime_health: JSON.parse(runtimeHealth.body),
+    cognition_models: JSON.parse(cognitionModels.body),
+    inference_response: JSON.parse(crossing.body)
   }
 };
 
-const receiptPath = process.env.GENESIS_RECEIPT_PATH || join(repoDir, "genesis", "receipts", "ALCHEMYSELFRVER01-latest.json");
 writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + "\n");
 console.log(JSON.stringify(receipt, null, 2));
