@@ -7,16 +7,20 @@ import { createSelfThought, verifyThoughtBytes } from "/Users/millysituated/OURS
 
 const HOST = process.env.OURSELF_SERVER_BIND_HOST || "0.0.0.0";
 const PORT = Number(process.env.OURSELF_SERVER_PORT || "3000");
-const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434";
+const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || modelRuntime.ollama_base_url || "http://127.0.0.1:11434";
 const REPO_ROOT = "/Users/millysituated/OURSELF";
 const PATHS_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-ecosystem-paths.json");
+const MODEL_RUNTIME_FILE = path.join(REPO_ROOT, "FLOWACTIONSELFWORK/runtime/ourself-local-qwen27b-80k.json");
 
 let config = {};
+let modelRuntime = {};
 try { config = JSON.parse(fs.readFileSync(PATHS_FILE, "utf8")); }
 catch (e) { console.error(JSON.stringify({ event: "CONFIG_LOAD_ERROR", error: e.message })); }
+try { modelRuntime = JSON.parse(fs.readFileSync(MODEL_RUNTIME_FILE, "utf8")); }
+catch (e) { throw new Error("MODEL_RUNTIME_CONFIG_REQUIRED: " + e.message); }
 
 const launch = config.launch_realm || {};
-const CANONICAL_MODEL = config.canonical_server?.model_target || "ourself-qwen38-27b-iq2s-80k:latest";
+const CANONICAL_MODEL = modelRuntime.model || config.canonical_server?.model_target || "ourself-qwen38-27b-iq2s-80k:latest";
 const requestedModel = process.env.OURSELF_MODEL || CANONICAL_MODEL;
 if (requestedModel !== CANONICAL_MODEL) {
   throw new Error(`OURSELF_MODEL_MISMATCH: expected ${CANONICAL_MODEL}, received ${requestedModel}`);
@@ -48,6 +52,18 @@ console.log(JSON.stringify({ event: "OURSELF_BOOT_BINDING", binding: bootBinding
 const sessions = new Map();
 const receipts = [];
 
+function assertStrictToolSchemas(toolList) {
+  for (const tool of toolList) {
+    const schema = tool.inputSchema;
+    if (!schema || schema.type !== "object" || !schema.properties || Array.isArray(schema.properties) || typeof schema.properties !== "object") {
+      throw new Error(`INVALID_MCP_TOOL_SCHEMA: ${tool.name}`);
+    }
+    if (schema.additionalProperties !== false) {
+      throw new Error(`UNBOUNDED_MCP_TOOL_SCHEMA: ${tool.name}`);
+    }
+  }
+}
+
 const tools = [
   {
     name: "ourself_health",
@@ -77,6 +93,8 @@ const tools = [
     }
   }
 ];
+
+assertStrictToolSchemas(tools);
 
 async function ollama(route, init = {}) {
   const response = await fetch(OLLAMA_BASE_URL + route, init);
