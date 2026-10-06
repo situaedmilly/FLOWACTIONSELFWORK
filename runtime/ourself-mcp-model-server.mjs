@@ -16,10 +16,12 @@ try { config = JSON.parse(fs.readFileSync(PATHS_FILE, "utf8")); }
 catch (e) { console.error(JSON.stringify({ event: "CONFIG_LOAD_ERROR", error: e.message })); }
 
 const launch = config.launch_realm || {};
-const OURSELF_MODEL =
-  process.env.OURSELF_MODEL ||
-  config.canonical_server?.model_target ||
-  "qwen27b-local";
+const CANONICAL_MODEL = config.canonical_server?.model_target || "ourself-qwen38-27b-iq2s-80k:latest";
+const requestedModel = process.env.OURSELF_MODEL || CANONICAL_MODEL;
+if (requestedModel !== CANONICAL_MODEL) {
+  throw new Error(`OURSELF_MODEL_MISMATCH: expected ${CANONICAL_MODEL}, received ${requestedModel}`);
+}
+const OURSELF_MODEL = CANONICAL_MODEL;
 const MCP_PROTOCOL_VERSION = process.env.MCP_PROTOCOL_VERSION || "2025-06-18";
 const INSTANCE_ID = config.canonical_server?.instance_id || "OURSELF-INSTANCE-0001";
 const REALITY_ID = "SELFTELLIGENCE-BOOT-0001";
@@ -58,10 +60,10 @@ const tools = [
     inputSchema: {
       type: "object",
       properties: {
-        prompt: { type: "string", minLength: 1 },
-        causal_parent: { type: ["string", "null"] }
+        prompt: { type: "string", minLength: 1 }
       },
-      required: ["prompt"]
+      required: ["prompt"],
+      additionalProperties: false
     }
   },
   {
@@ -70,7 +72,8 @@ const tools = [
     inputSchema: {
       type: "object",
       properties: { prompt: { type: "string", minLength: 1 } },
-      required: ["prompt"]
+      required: ["prompt"],
+      additionalProperties: false
     }
   }
 ];
@@ -187,7 +190,7 @@ async function dispatch(message) {
 
     if (name === "ourself_selftell" || name === "ourself_model_inference") {
       if (typeof args.prompt !== "string" || !args.prompt.length) throw new Error("COGNITIVE_PROMPT_REQUIRED");
-      const result = await selfTell(sessionId, args.prompt, args.causal_parent ?? null);
+      const result = await selfTell(sessionId, args.prompt, null);
       return {
         response: {
           jsonrpc: "2.0",
