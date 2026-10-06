@@ -1,1 +1,13 @@
-{"server_id":"OURSELF-MCP-MODEL-SERVER","instance_id":"OURSELF-INSTANCE-0001","authority":"OURSELF","model_target":"ourself-qwen38-27b-iq2s-80k:latest","ollama_role":"COGNITION_SUBSTRATE","cloud_model":false,"runtime_state":"LIVE_LOCAL_PROCESS","realized_endpoint":"http://127.0.0.1:3000"}
+{
+  "server_id": "OURSELF-MCP-MODEL-SERVER",
+  "instance_id": "OURSELF-INSTANCE-0001",
+  "authority": "OURSELF",
+  "model_target": "ourself-qwen38-27b-iq2s-80k:latest",
+  "ollama_role": "RETIRED",
+  "cloud_model": false,
+  "runtime_state": "LIVE_LOCAL_PROCESS",
+  "realized_endpoint": "http://127.0.0.1:3000",
+  "cognition_substrate": "LLAMA_CPP",
+  "cognitive_endpoint": "http://127.0.0.1:8080/v1",
+  "context_window": 80000
+}
