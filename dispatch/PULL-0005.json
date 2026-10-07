@@ -1,0 +1,18 @@
+{
+  "dispatch_id": "DISPATCH-0005",
+  "input_id": "INPUT-0005",
+  "pull_id": "PULL-0005",
+  "thought_id": "THOUGHT-0005",
+  "thought_blob_sha": "55d35bd14af59cccf666d6b86d996e199e2fefa7",
+  "gate_id": "GATE-0005",
+  "source_instance_id": "GPTSELF-C",
+  "target_instance_id": "CHATGPT_INSTANCE_001",
+  "action": "EXECUTE_PULL",
+  "execution_required": true,
+  "action_repo": "situaedmilly/FLOWACTIONSELFWORK",
+  "status": "DISPATCHED",
+  "authority": "EXPLICIT_USER_EXECUTION_REQUEST",
+  "dispatched_at": "2026-10-07T22:05:47Z",
+  "matter_class": "REAL_MATTER_FEED (ALCHEMYGENESIS realized chain)",
+  "note": "Dispatch records the execution input without asserting CHATGPT_INSTANCE_001 execution, PUSH-0005, effect, or gate completion."
+}
