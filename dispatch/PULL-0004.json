@@ -1,0 +1,16 @@
+{
+  "dispatch_id": "DISPATCH-0004",
+  "input_id": "INPUT-0004",
+  "pull_id": "PULL-0004",
+  "thought_id": "THOUGHT-0004",
+  "gate_id": "GATE-0004",
+  "source_instance_id": "GPTSELF-C",
+  "target_instance_id": "CHATGPT_INSTANCE_001",
+  "action": "EXECUTE_PULL",
+  "execution_required": true,
+  "action_repo": "situaedmilly/FLOWACTIONSELFWORK",
+  "status": "DISPATCHED",
+  "authority": "EXPLICIT_USER_EXECUTION_REQUEST",
+  "dispatched_at": "2026-10-07T20:52:00Z",
+  "note": "Dispatch records the execution input without asserting CHATGPT_INSTANCE_001 execution, PUSH-0004, effect, or gate completion."
+}
