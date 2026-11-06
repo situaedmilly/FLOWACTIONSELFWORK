@@ -1,5 +1,5 @@
 action_manifest:
-  version: "ACTIONSELF/0.1"
+  version: "ACTIONSELF/0.2"
   sovereign_id: "did:ourself:action:situaedmilly:flowactionselfwork"
   execution_coordinate: "action://ourself.ecosystem/situaedmilly/FLOWACTIONSELFWORK@INSTANCE#job-pipeline"
   request_type: ACTION_DISPATCH
@@ -7,13 +7,15 @@ action_manifest:
   frequency: ON_DEMAND
   compute_substrate:
     runner_type: "OURSELF_ACTION_NODE"
-    max_execution_window_sec: 300
+    max_execution_window_sec: 600
     allowed_mutations:
       - COGNITIVE_STATE_MUTATION
       - REVERSELF_SIGNAL_TRANSPORT
+      - LOCAL_TEST_EXECUTION
   security_membrane:
     admit_script: "exec.mjs"
     require_signature_verification: true
+    signature_algorithm: Ed25519
     authorized_issuers:
       - "did:ourself:repo:situaedmilly:SELFVEREIGN-ADDRESSELF"
   execution_policy:
@@ -22,9 +24,21 @@ action_manifest:
       - DETERMINISTIC_BUILD
       - STATE_MIGRATION
       - AGENT_REASONING
+      - TEST_SUITE
+    allowed_actions:
+      - "ACTUATIONSELF/DETERMINISTIC_BUILD"
+      - "ACTUATIONSELF/FULL_REPOSITORY_TEST_SUITE"
     external_effect_default: false
     arbitrary_shell: false
     arbitrary_network: false
+    test_execution:
+      executable: "process.execPath"
+      argv: ["--test"]
+      shell: false
+      require_target_root_allowlist: true
+      require_expected_git_head: true
+      require_worktree_preimage: true
+      max_timeout_ms: 600000
     execution_authority_surface: "OURSELF_ACTION_RUNNER"
     github_actions_execution: false
   receipt:
