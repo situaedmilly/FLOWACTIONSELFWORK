@@ -28,6 +28,11 @@ const authorityByJob = {
 if (request.authority_ref !== authorityByJob[request.job_type]) throw new Error("ACTIONSELF_AUTHORITY_REJECTED");
 const publicKeyPem = process.env.ACTIONSELF_ISSUER_PUBLIC_KEY;
 if (!publicKeyPem) throw new Error("ACTIONSELF_PUBLIC_KEY_REQUIRED");
+const expectedKeyFingerprint = manifest.match(/issuer_public_key_sha256:\s*"([a-f0-9]{64})"/)?.[1];
+const actualKeyFingerprint = createHash("sha256").update(publicKeyPem).digest("hex");
+if (!expectedKeyFingerprint || actualKeyFingerprint !== expectedKeyFingerprint) {
+  throw new Error("ACTIONSELF_ISSUER_KEY_UNBOUND");
+}
 
 const unsigned = { ...request };
 delete unsigned.signature;
