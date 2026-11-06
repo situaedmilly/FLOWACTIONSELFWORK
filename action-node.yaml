@@ -16,6 +16,7 @@ action_manifest:
     admit_script: "exec.mjs"
     require_signature_verification: true
     signature_algorithm: Ed25519
+    issuer_public_key_sha256: "PENDING_LOCAL_KEY_PROVISIONING"
     authorized_issuers:
       - "did:ourself:repo:situaedmilly:SELFVEREIGN-ADDRESSELF"
   execution_policy:
