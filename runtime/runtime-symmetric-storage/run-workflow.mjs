@@ -46,7 +46,8 @@ async function worktreeDigest(repo) {
 async function archive(name) {
   const spec=specs[name], repo=path.join(ROOT,spec.repo), target=path.join(temp,name);
   await fs.mkdir(target);
-  const before=run("git",["-C",repo,"status","--porcelain"]);requirePass(before,"pre-run worktree status "+name);\n  const beforeContent=await worktreeDigest(repo);
+  const before=run("git",["-C",repo,"status","--porcelain"]);requirePass(before,"pre-run worktree status "+name);
+  const beforeContent=await worktreeDigest(repo);
   const fetch=run("git",["-C",repo,"fetch","--no-tags","origin","refs/heads/"+spec.branch],{timeout:60000});requirePass(fetch,"fetch "+name);
   const rev=run("git",["-C",repo,"rev-parse","FETCH_HEAD"]);requirePass(rev,"resolve commit "+name);
   const archive=spawnSync("git",["-C",repo,"archive","--format=tar","FETCH_HEAD"],{encoding:null,timeout:60000,maxBuffer:512*1024*1024});
