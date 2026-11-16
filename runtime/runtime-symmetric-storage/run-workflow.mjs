@@ -29,7 +29,7 @@ function requirePass(r,label){if(r.status!=="PASS")throw new Error(label+" faile
 async function worktreeDigest(repo) {
   const listed=spawnSync("git",["-C",repo,"ls-files","-co","--exclude-standard","-z"],{encoding:null,timeout:30000,maxBuffer:32*1024*1024});
   if(listed.error||listed.status!==0)throw new Error("cannot enumerate worktree files: "+repo);
-  const names=listed.stdout.toString("utf8").split("\\0").filter(Boolean).sort();
+  const names=listed.stdout.toString("utf8").split("\0").filter(Boolean).sort();
   const hash=crypto.createHash("sha256");
   let fileCount=0;
   for(const name of names){
