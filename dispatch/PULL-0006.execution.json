@@ -1,0 +1,34 @@
+{
+  "execution_id": "EXECUTION-0006",
+  "dispatch_id": "DISPATCH-0006",
+  "input_id": "INPUT-0006",
+  "pull_id": "PULL-0006",
+  "gate_id": "GATE-VM-PAYLOAD-DECLARATION-001",
+  "executor_instance_id": "OURSELFMAC.local",
+  "executor_binding": "OURSELFLOW declaration validator executed through the authorized local CLI runtime",
+  "action": "VALIDATE_VM_PAYLOAD_DECLARATION",
+  "status": "EXECUTED",
+  "executed_at": "2026-11-16T22:05:59.693Z",
+  "result": "Canonical DATASELF manifest, build specification and Draft 2020-12 schema were fetched by immutable ref into temporary validation inputs. The FLOWACTIONSELFWORK validator completed 16/16 invariant checks, wrote an exclusive-create receipt, read the receipt back byte-for-byte and verified its body digest.",
+  "payload_id": "REVERSELF-WINARM64-GENESIS-001",
+  "manifest_sha256": "5008bdfe1524080e3e6728781f4586ae30727e9b8b8d2d988217d33913dd1ad0",
+  "build_spec_sha256": "f6234b7802076d3d46488001ca320638731b048ab89906591a9bb5e59e930f1f",
+  "validation_checks": {
+    "passed": 16,
+    "failed": 0,
+    "receipt_sha256": "70d9c880faf8cd996392bd3affda65b1edd5ed156b7d2380012ae8f5a6f09b05"
+  },
+  "effect_scope": "LOCAL_DECLARATION_VALIDATION_AND_RECEIPT_PERSISTENCE",
+  "payload_materialized": false,
+  "external_effect": false,
+  "launch_authorized": false,
+  "boot_performed": false,
+  "next_required_transition": "RESOLVE_OFFICIAL_INSTALLER_MEDIA_AND_EXISTING_HOST_HYPERVISOR",
+  "boundary_law": [
+    "DECLARATION != MATERIALIZATION",
+    "DISPATCH != EXECUTION",
+    "RECEIPT != EXTERNAL_EFFECT",
+    "AUTHORITY != OBSERVATION",
+    "VALIDATION != LAUNCH_ADMISSION"
+  ]
+}
