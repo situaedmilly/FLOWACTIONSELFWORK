@@ -1,0 +1,62 @@
+{
+  "dispatch_id": "DISPATCH-0008",
+  "pull_id": "PULL-0008",
+  "gate_id": "GATE-RUNTIME-SYMMETRIC-STORAGE-001",
+  "action": "EXECUTE_RUNTIME_SYMMETRIC_STORAGE_VALIDATION",
+  "execution_required": true,
+  "authority": "EXPLICIT_USER_ECOSYSTEM_WIDE_EXECUTION_REQUEST",
+  "execution_scope": "READ_ONLY_SOURCE_FETCH_LOCAL_TESTS_SCHEMA_COMPILE_AND_HOST_INVENTORY",
+  "sources": [
+    {
+      "repository": "situaedmilly/OURPROCESSORSELF",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "RUN_NPM_TEST"
+    },
+    {
+      "repository": "situaedmilly/OURSELF-DATABASE-ESTATE",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "COMPILE_SCHEMA",
+      "schema_paths": [
+        "SCHEMAS/ourdata-envelope.v1.schema.json",
+        "SCHEMAS/ourdata-transition.v1.schema.json",
+        "SCHEMAS/storage-adapter-registration.v1.schema.json"
+      ]
+    },
+    {
+      "repository": "situaedmilly/OURSYSTEMSELFOPERATIN",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_CONSTITUTIONAL_CONTRACT_PRESENT"
+    },
+    {
+      "repository": "situaedmilly/ALTONUMBUSELF",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_MEMORY_BINDING_CONTRACT_PRESENT"
+    },
+    {
+      "repository": "situaedmilly/ourself-cloud-server-network",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_REPLICATION_CONTRACT_PRESENT"
+    },
+    {
+      "repository": "situaedmilly/self-protocol-suite",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_ADAPTER_WIRE_CONTRACT_PRESENT"
+    },
+    {
+      "repository": "situaedmilly/ourself-core",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_ECOSYSTEM_MAP_PRESENT"
+    }
+  ],
+  "prohibited_effects": [
+    "GITHUB_ACTIONS_EXECUTION",
+    "MAIN_BRANCH_MUTATION",
+    "SOURCE_WORKTREE_MUTATION",
+    "GLOBAL_PACKAGE_INSTALLATION",
+    "CANONICAL_STORE_PROVISIONING",
+    "REPLICATION",
+    "CREDENTIAL_CREATION",
+    "VM_DISK_CREATION",
+    "VM_BOOT"
+  ]
+}
