@@ -114,12 +114,14 @@ const receipt = {
   schema_version:"ourself.flow-validation-receipt.v1",
   receipt_id:"FLOW-VALIDATION-" + crypto.randomUUID(),
   timestamp_utc:new Date().toISOString(),
-  workflow_id:workflow.workflow_id,\n  dispatch_id:dispatch.dispatch_id,\n  pull_id:dispatch.pull_id,\n  dispatch_sha256:sha256(canonical(dispatch)),\n  workflow_sha256:sha256(canonical(workflow)),
+  workflow_id:workflow.workflow_id,
+  dispatch_id:dispatch.dispatch_id,\n  pull_id:dispatch.pull_id,\n  dispatch_sha256:sha256(canonical(dispatch)),\n  workflow_sha256:sha256(canonical(workflow)),
   dispatch_id:"DISPATCH-0007",
   pull_id:"PULL-0007",
   orchestrator:"FLOWACTIONSELFWORK",
   executor:"OURSELFLOW-VALIDATION-EXECUTOR",
-  disposition:allPass?"VALIDATION_PASSED":"VALIDATION_FAILED_OR_BLOCKED",\n  workflow_binding:{status:"PASS",dispatch_id:dispatch.dispatch_id,pull_id:dispatch.pull_id},
+  disposition:allPass?"VALIDATION_PASSED":"VALIDATION_FAILED_OR_BLOCKED",
+  workflow_binding:{status:"PASS",dispatch_id:dispatch.dispatch_id,pull_id:dispatch.pull_id},
   source_refs:refs,
   package_test:{command:"npm test",...testResult},
   schema_compilation:schemaResults,
@@ -142,7 +144,8 @@ requireValue(readback===output,"workflow receipt read-back mismatch");
 const parsed=JSON.parse(readback);const claimed=parsed.receipt_sha256;delete parsed.receipt_sha256;
 requireValue(claimed===sha256(canonical(parsed)),"workflow receipt digest mismatch");
 console.log(JSON.stringify({
-  disposition:receipt.disposition,\n  workflow_binding:"PASS",
+  disposition:receipt.disposition,
+  workflow_binding:"PASS",
   receipt_id:receipt.receipt_id,
   receipt_path:receiptPath,
   receipt_sha256:claimed,
