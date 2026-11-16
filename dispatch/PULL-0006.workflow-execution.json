@@ -1,0 +1,42 @@
+{
+  "execution_id": "EXECUTION-0006-FLOW",
+  "dispatch_id": "DISPATCH-0006",
+  "pull_id": "PULL-0006",
+  "gate_id": "GATE-VM-PAYLOAD-DECLARATION-001",
+  "executor_instance_id": "OURSELFMAC.local",
+  "executor_binding": "FLOWACTIONSELFWORK run-workflow.mjs invoked on the authorized Mac CLI runtime; validator executed as a fixed child process",
+  "action": "EXECUTE_OURSELFLOW_VM_PAYLOAD_DECLARATION_WORKFLOW",
+  "status": "EXECUTED",
+  "executed_at": "2026-11-16T22:08:59.696Z",
+  "workflow_id": "OURSELFLOW-REVERSELF-VM-PAYLOAD-GENESIS-001",
+  "workflow_receipt": {
+    "path": "runtime/reverself-vm-payload/receipts/FLOW-RECEIPT-d552f99c-9902-420e-a526-cf559771b057.json",
+    "sha256": "c16405ea27905052ac88c223d62b85aeab2fd41d39def5a921461a739ffa3cbf",
+    "workflow_checks_passed": 12
+  },
+  "validator_receipt": {
+    "path": "runtime/reverself-vm-payload/receipts/VM-PAYLOAD-DECLARATION-12556881-9caa-4bb5-9279-852609298d55.json",
+    "sha256": "d398f162bfd482174e4726bf92fbb2f4458d3b1fbad5980d90b029730e8cec96",
+    "manifest_sha256": "5008bdfe1524080e3e6728781f4586ae30727e9b8b8d2d988217d33913dd1ad0",
+    "build_spec_sha256": "f6234b7802076d3d46488001ca320638731b048ab89906591a9bb5e59e930f1f",
+    "validator_checks_passed": 16
+  },
+  "result": "PULL-0006 dispatch, source binding, bounded workflow definition, step order and prohibited-effect boundaries were verified. The child manifest validator completed all 16 invariant checks. Both receipts were read back and digest-verified before repository persistence.",
+  "effects": {
+    "workflow_execution_performed": true,
+    "payload_materialized": false,
+    "external_effect": false,
+    "disk_created": false,
+    "firmware_materialized": false,
+    "launch_admission_requested": false,
+    "vm_booted": false
+  },
+  "next_required_transition": "RUNTIME_SELECTION_AND_STORAGE_ADMISSION",
+  "boundary_law": [
+    "DECLARATION != MATERIALIZATION",
+    "DISPATCH != EXECUTION",
+    "EXECUTION != EXTERNAL_EFFECT",
+    "RECEIPT != ADMISSION",
+    "ADMISSION != BOOT"
+  ]
+}

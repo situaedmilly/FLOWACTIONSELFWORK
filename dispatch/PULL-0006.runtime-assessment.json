@@ -1,0 +1,55 @@
+{
+  "assessment_id": "REVERSELF-WINARM64-RUNTIME-ASSESSMENT-001",
+  "observed_on": "2026-11-16",
+  "payload_id": "REVERSELF-WINARM64-GENESIS-001",
+  "source_resolution": {
+    "status": "OFFICIAL_SOURCE_RESOLVED_MEDIA_NOT_ACQUIRED",
+    "provider": "Microsoft",
+    "product": "Windows 11 2026 Update 26H2 ARM64 ISO",
+    "url": "https://www.microsoft.com/en-us/software-download/windows11arm64",
+    "learn_reference": "https://learn.microsoft.com/en-us/windows/arm/iso",
+    "media_downloaded": false,
+    "language_selected": false,
+    "product_key_or_license_confirmed": false,
+    "integrity_verification": "Must compare the downloaded ISO SHA-256 with the Microsoft-published value for the selected locale"
+  },
+  "host": {
+    "hostname": "OURSELFMAC.local",
+    "model": "Mac mini Mac16,10",
+    "chip": "Apple M4",
+    "architecture": "arm64",
+    "memory_gib": 16,
+    "macos": "27.0.1",
+    "available_storage_gib": 12
+  },
+  "runtime_candidates": [
+    {"name":"UTM","installed":false,"windows_arm64_candidate":true,"qemu_installation_required_or_bundled":true,"admitted":false},
+    {"name":"Parallels Desktop","installed":false,"admitted":false},
+    {"name":"VMware Fusion","installed":false,"admitted":false},
+    {"name":"Apple Virtualization.framework","available_in_os":true,"officially_documented_guest_scope":["macOS","Linux"],"windows_11_arm64_admitted":false}
+  ],
+  "decision": {
+    "status": "BLOCKED_RUNTIME_UNRESOLVED",
+    "reason": "No compatible, already-installed and admitted Windows ARM64 runtime is present on the inspected host. QEMU installation is not authorized. Available storage is 12 GiB, so media and artifact staging also require a deliberate storage target.",
+    "required_resolution": [
+      "Select and authorize a compatible Windows ARM64 hypervisor/runtime",
+      "Confirm Windows edition, language and license/product key",
+      "Provide or designate sufficient storage for ISO, firmware, disk growth and preservation copy"
+    ]
+  },
+  "effects": {
+    "software_installed": false,
+    "installer_downloaded": false,
+    "disk_created": false,
+    "firmware_materialized": false,
+    "launch_admission_requested": false,
+    "vm_booted": false
+  },
+  "references": [
+    "https://www.microsoft.com/en-us/software-download/windows11arm64",
+    "https://learn.microsoft.com/en-us/windows/arm/iso",
+    "https://docs.getutm.app/guides/windows/",
+    "https://docs.getutm.app/settings-qemu/qemu/",
+    "https://developer.apple.com/documentation/virtualization"
+  ]
+}

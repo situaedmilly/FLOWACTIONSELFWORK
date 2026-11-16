@@ -1,0 +1,51 @@
+{
+  "schema_version": "ourself.host-runtime-inventory.v1",
+  "inventory_id": "HOST-RUNTIME-INVENTORY-OURSELFMAC-2026-11-16",
+  "observed_on": "2026-11-16",
+  "host": {
+    "hostname": "OURSELFMAC.local",
+    "model": "Mac mini",
+    "model_identifier": "Mac16,10",
+    "chip": "Apple M4",
+    "architecture": "arm64",
+    "memory_gib": 16,
+    "operating_system": "macOS",
+    "os_version": "27.0.1",
+    "build": "26A434",
+    "data_volume_available_gib": 12
+  },
+  "runtime_inventory": {
+    "utm_application_present": false,
+    "parallels_desktop_present": false,
+    "vmware_fusion_present": false,
+    "qemu_system_aarch64_on_path": false,
+    "hypervisor_selected": false
+  },
+  "artifact_search": {
+    "searched_paths": [
+      "/Users/millysituated/Downloads",
+      "/Users/millysituated/OURSELF"
+    ],
+    "max_depth": 4,
+    "windows_arm64_iso_found": false,
+    "edk2_aarch64_firmware_found": false
+  },
+  "assessment": {
+    "status": "BLOCKED_NO_EXISTING_ADMITTED_HYPERVISOR",
+    "reason": "No existing UTM, Parallels Desktop or VMware Fusion installation was found, and qemu-system-aarch64 was not found on PATH. QEMU installation remains unauthorized.",
+    "storage_constraint": "12 GiB currently available; insufficient headroom to safely acquire and stage a multi-gigabyte Windows installer plus firmware and guest tooling without additional storage planning.",
+    "next_action": "Resolve an already-available, authorized Windows ARM64 hypervisor/runtime path or obtain explicit authorization for a specific runtime installation and storage target."
+  },
+  "mutation_scope": {
+    "host_software_installed": false,
+    "existing_disks_modified": false,
+    "new_virtual_disk_created": false,
+    "firmware_modified": false,
+    "vm_booted": false
+  },
+  "limitations": [
+    "Inventory is a point-in-time observation of the listed host and search paths",
+    "Absence on PATH does not prove no binary exists outside PATH",
+    "The search did not enumerate external drives, network storage or cloud environments"
+  ]
+}

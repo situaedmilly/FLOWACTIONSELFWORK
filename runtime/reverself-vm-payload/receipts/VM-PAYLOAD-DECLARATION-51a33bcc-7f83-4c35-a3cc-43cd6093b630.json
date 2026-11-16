@@ -1,0 +1,43 @@
+{
+  "schema_version": "ourself.vm-payload-validation-receipt.v1",
+  "receipt_id": "VM-PAYLOAD-DECLARATION-51a33bcc-7f83-4c35-a3cc-43cd6093b630",
+  "timestamp_utc": "2026-11-16T22:05:59.693Z",
+  "workflow_id": "OURSELFLOW-REVERSELF-VM-PAYLOAD-GENESIS-001",
+  "dispatch_id": "DISPATCH-0006",
+  "payload_id": "REVERSELF-WINARM64-GENESIS-001",
+  "manifest_sha256": "5008bdfe1524080e3e6728781f4586ae30727e9b8b8d2d988217d33913dd1ad0",
+  "manifest_bytes": 4133,
+  "build_spec_sha256": "f6234b7802076d3d46488001ca320638731b048ab89906591a9bb5e59e930f1f",
+  "build_spec_bytes": 4503,
+  "schema_sha256": "95bbcec2083486fcd2bc697a0054337ab4a124d5e96fdf35c18c514a1819ce4d",
+  "checks": [
+    {"id":"SCHEMA_DRAFT","status":"PASS","detail":"Draft 2020-12 schema declared"},
+    {"id":"MANIFEST_SCHEMA","status":"PASS","detail":"manifest and schema versions match"},
+    {"id":"MANIFEST_KEYS","status":"PASS","detail":"manifest has exact required top-level key set"},
+    {"id":"PAYLOAD_IDENTITY","status":"PASS","detail":"new payload, reality and instance identities are explicit"},
+    {"id":"GUEST_ARCHITECTURE","status":"PASS","detail":"Windows ARM64 / AArch64 UEFI / Secure Boot / TPM 2.0"},
+    {"id":"HARDWARE_PROFILE","status":"PASS","detail":"4 vCPU, 8 GiB RAM, 128 GiB virtual disk"},
+    {"id":"STORAGE_BINDING","status":"PASS","detail":"new sparse RAW disk declared, not yet materialized"},
+    {"id":"COMPONENT_COVERAGE","status":"PASS","detail":"all eight required component roles occur exactly once"},
+    {"id":"UNMATERIALIZED_COMPONENTS","status":"PASS","detail":"unmaterialized artifacts do not claim hashes, byte counts or storage refs"},
+    {"id":"RUNTIME_BOUNDARY","status":"PASS","detail":"runtime remains unselected; QEMU installation is not authorized"},
+    {"id":"INSTALL_MEDIA_BOUNDARY","status":"PASS","detail":"official installer media and licensing remain unresolved"},
+    {"id":"ADMISSION_BOUNDARY","status":"PASS","detail":"no authority, custody or witness is fabricated"},
+    {"id":"BUILD_SPEC_BINDING","status":"PASS","detail":"build spec binds to this payload identity"},
+    {"id":"BUILD_ORDER","status":"PASS","detail":"build order contains media, firmware, runtime, disk, envelope, preservation, admission and boot gates"},
+    {"id":"NO_ORIGINAL_REUSE","status":"PASS","detail":"new payload is distinct from historical VM"},
+    {"id":"ORCHESTRATOR","status":"PASS","detail":"FLOWACTIONSELFWORK is the orchestrator; GitHub Actions excluded"}
+  ],
+  "disposition": "DECLARATION_VALIDATED_BUILD_PENDING",
+  "execution_performed": true,
+  "payload_materialized": false,
+  "external_effect": false,
+  "launch_authorized": false,
+  "next_required_stages": [
+    "RESOLVE_OFFICIAL_INSTALLER_MEDIA",
+    "RESOLVE_COMPATIBLE_FIRMWARE",
+    "INSPECT_EXISTING_HOST_HYPERVISOR",
+    "SELECT_RUNTIME_ADAPTER"
+  ],
+  "receipt_sha256": "70d9c880faf8cd996392bd3affda65b1edd5ed156b7d2380012ae8f5a6f09b05"
+}
