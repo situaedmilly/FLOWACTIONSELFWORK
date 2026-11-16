@@ -1,0 +1,48 @@
+{
+  "schema_version": "ourself.flow-execution-receipt.v1",
+  "receipt_id": "FLOW-RECEIPT-d552f99c-9902-420e-a526-cf559771b057",
+  "timestamp_utc": "2026-11-16T22:08:59.696Z",
+  "workflow_id": "OURSELFLOW-REVERSELF-VM-PAYLOAD-GENESIS-001",
+  "dispatch_id": "DISPATCH-0006",
+  "pull_id": "PULL-0006",
+  "payload_id": "REVERSELF-WINARM64-GENESIS-001",
+  "disposition": "WORKFLOW_EXECUTED_DECLARATION_VALIDATED_BUILD_PENDING",
+  "orchestrator": "FLOWACTIONSELFWORK",
+  "executor": "OURSELFLOW-VM-PAYLOAD-EXECUTOR",
+  "execution_mode": "BOUNDED_VALIDATION",
+  "workflow_checks": [
+    {"id":"DISPATCH_ACTION","status":"PASS","detail":"dispatch is the expected active PULL-0006 action"},
+    {"id":"DISPATCH_AUTHORITY","status":"PASS","detail":"explicit user execution authority is present"},
+    {"id":"DISPATCH_SCOPE","status":"PASS","detail":"dispatch scope is bounded to declaration validation"},
+    {"id":"WORKFLOW_BINDING","status":"PASS","detail":"workflow, dispatch and PULL identifiers match"},
+    {"id":"SOURCE_BINDING","status":"PASS","detail":"workflow source points to the exact DATASELF ref and artifacts"},
+    {"id":"EXECUTION_MODE","status":"PASS","detail":"bounded local validation is routed through FLOWACTIONSELFWORK"},
+    {"id":"PAYLOAD_BINDING","status":"PASS","detail":"manifest payload identity matches PULL-0006"},
+    {"id":"STEP_ORDER","status":"PASS","detail":"all five declared workflow steps are present in order"},
+    {"id":"EFFECT_BOUNDARY","status":"PASS","detail":"prohibited effects remain explicitly denied"},
+    {"id":"VALIDATOR_EXECUTION","status":"PASS","detail":"manifest validator completed 16/16 invariants"},
+    {"id":"VALIDATOR_RECEIPT","status":"PASS","detail":"validator receipt re-read and bound to this payload"},
+    {"id":"NO_EXTERNAL_EFFECT","status":"PASS","detail":"validator performed no external effect or VM actuation"}
+  ],
+  "validator_receipt": {
+    "path": "/tmp/reverself-vm-flow.hUKLnm/receipts/VM-PAYLOAD-DECLARATION-12556881-9caa-4bb5-9279-852609298d55.json",
+    "sha256": "d398f162bfd482174e4726bf92fbb2f4458d3b1fbad5980d90b029730e8cec96",
+    "manifest_sha256": "5008bdfe1524080e3e6728781f4586ae30727e9b8b8d2d988217d33913dd1ad0",
+    "build_spec_sha256": "f6234b7802076d3d46488001ca320638731b048ab89906591a9bb5e59e930f1f",
+    "checks_passed": 16
+  },
+  "effects": {
+    "workflow_execution_performed": true,
+    "payload_materialized": false,
+    "external_effect": false,
+    "launch_authorized": false,
+    "vm_booted": false
+  },
+  "next_required_stages": [
+    "RESOLVE_INSTALLATION_LICENSE",
+    "AUTHORIZE_PARALLELS_DESKTOP_27_INSTALLATION",
+    "DESIGNATE_SUFFICIENT_STORAGE",
+    "MATERIALIZE_NEW_VM_CONFIGURATION_AND_DISK"
+  ],
+  "receipt_sha256": "c16405ea27905052ac88c223d62b85aeab2fd41d39def5a921461a739ffa3cbf"
+}
