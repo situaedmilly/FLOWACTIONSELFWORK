@@ -1,0 +1,51 @@
+{
+  "dispatch_id": "DISPATCH-0007",
+  "input_id": "INPUT-0007",
+  "pull_id": "PULL-0007",
+  "thought_id": "THOUGHT-0007",
+  "gate_id": "GATE-REVERSELF-CONTINUITY-VALIDATION-001",
+  "source_instance_id": "CHATGPT_INSTANCE_001",
+  "target_instance_id": "OURSELFLOW-VALIDATION-EXECUTOR",
+  "action": "EXECUTE_REVERSELF_TEST_AND_SCHEMA_VALIDATION",
+  "execution_required": true,
+  "action_repo": "situaedmilly/FLOWACTIONSELFWORK",
+  "sources": [
+    {
+      "repository": "situaedmilly/OURPROCESSORSELF",
+      "ref": "reverself/continuity-selfthought-v0.1",
+      "operation": "RUN_PACKAGE_TEST_SUITE",
+      "command": ["npm", "test"]
+    },
+    {
+      "repository": "situaedmilly/OURSELF-DATABASE-ESTATE",
+      "ref": "reverself/continuity-selfthought-v0.1",
+      "operation": "COMPILE_DRAFT_2020_12_SCHEMAS",
+      "schema_paths": [
+        "SCHEMAS/ourdata-envelope.v1.schema.json",
+        "SCHEMAS/ourdata-transition.v1.schema.json",
+        "SCHEMAS/reverself-continuity-profile.v1.schema.json"
+      ]
+    },
+    {
+      "repository": "situaedmilly/OURSELF-DATABASE-ESTATE",
+      "ref": "reverself/vm-payload-genesis-v0.1",
+      "operation": "COMPILE_DRAFT_2020_12_SCHEMA",
+      "schema_paths": ["SCHEMAS/ourself-vm-payload.v1.schema.json"]
+    }
+  ],
+  "status": "DISPATCHED",
+  "authority": "EXPLICIT_USER_EXECUTION_REQUEST",
+  "execution_scope": "READ_ONLY_REPO_TESTS_AND_SCHEMA_COMPILE",
+  "dependency_policy": "EPHEMERAL_NPM_CACHE_ONLY_NO_REPO_OR_GLOBAL_INSTALL",
+  "prohibited_effects": [
+    "GITHUB_ACTIONS_EXECUTION",
+    "MAIN_BRANCH_MUTATION",
+    "SOURCE_REPOSITORY_MUTATION",
+    "GLOBAL_PACKAGE_INSTALLATION",
+    "QEMU_INSTALLATION",
+    "VM_DISK_CREATION",
+    "FIRMWARE_MUTATION",
+    "VM_BOOT"
+  ],
+  "note": "PULL-0007 routes the former Actions test and schema checks through OURSELFLOW. Source refs are fetched into temporary validation trees; existing dirty local worktrees are not checked out or modified."
+}
