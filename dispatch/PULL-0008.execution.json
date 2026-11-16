@@ -13,7 +13,7 @@
   "validated_results": {
     "processor_tests": {
       "status": "PASS",
-      "passed": 0,
+      "passed": 74,
       "failed": 0
     },
     "draft_2020_12_schemas": {
@@ -38,7 +38,7 @@
     {
       "repository": "OURSELF-DATABASE-ESTATE",
       "branch": "architecture/runtime-symmetric-storage-v0.1",
-      "commit": "07ee9b1ea9a24e0d585f2515519e2fd06928a180",
+      "commit": "dadcef8c5318b0e969be98299a93bd27e5543c7b",
       "scope": "canonical storage contract, registration schema, runtime adapter registry, conformance matrix"
     },
     {
@@ -50,13 +50,13 @@
     {
       "repository": "OURPROCESSORSELF",
       "branch": "architecture/runtime-symmetric-storage-v0.1",
-      "commit": "6c780f6449a9dcc211d483b9b2497e365aadde73",
+      "commit": "c1315bb7b5c452436cc9764d1044609bdf541ba0",
       "scope": "POSIX filesystem CAS adapter, tests, ecosystem path binding"
     },
     {
       "repository": "FLOWACTIONSELFWORK",
       "branch": "architecture/runtime-symmetric-storage-v0.1",
-      "commit": "8f4ddd385ab6702d42f1bef6c2590712ce81a33d",
+      "commit": "50c894e2fdf8627564f3f86ae6bfab4f80dcaa17",
       "scope": "OURSELFLOW workflow, dispatch, runner and receipt"
     },
     {
