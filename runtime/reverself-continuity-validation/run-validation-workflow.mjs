@@ -25,6 +25,7 @@ function canonical(value) {
   return JSON.stringify(value);
 }
 function sha256(value) { return crypto.createHash("sha256").update(value).digest("hex"); }
+async function readJson(file) { return JSON.parse(await fs.readFile(file, "utf8")); }
 function run(command, args, options={}) {
   const result = spawnSync(command, args, {
     encoding:"utf8",
