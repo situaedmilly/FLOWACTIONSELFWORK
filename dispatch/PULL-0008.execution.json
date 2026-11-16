@@ -1,0 +1,137 @@
+{
+  "execution_id": "EXECUTION-0008",
+  "dispatch_id": "DISPATCH-0008",
+  "pull_id": "PULL-0008",
+  "gate_id": "GATE-RUNTIME-SYMMETRIC-STORAGE-001",
+  "executor_instance_id": "OURSELFMAC.local",
+  "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
+  "status": "EXECUTED",
+  "receipt": {
+    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-108e37e0-08f8-42d1-841c-953575344bf9.json",
+    "sha256": "8bd271bd6914111b621680a46b2204b7477cbf5c54de1d8e6469450d9bdc156f"
+  },
+  "validated_results": {
+    "processor_tests": {
+      "status": "PASS",
+      "passed": 64,
+      "failed": 0
+    },
+    "draft_2020_12_schemas": {
+      "status": "PASS",
+      "passed": 3,
+      "failed": 0
+    },
+    "posix_adapter_tests": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0
+    },
+    "source_worktrees_unchanged": true
+  },
+  "repository_artifacts": [
+    {
+      "repository": "OURSELF-DATABASE-ESTATE",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "6ce52e2c57b0ed199968342ccf7277c8e10788c7",
+      "scope": "canonical storage contract, registration schema, runtime adapter registry, conformance matrix"
+    },
+    {
+      "repository": "OURSYSTEMSELFOPERATIN",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "fbaf25968dd21b59902d98e04f4b95735e2823e9",
+      "scope": "OSOS constitutional storage symmetry contract"
+    },
+    {
+      "repository": "OURPROCESSORSELF",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "5203b2efa892897ecc7dc7004c90bc817521ef44",
+      "scope": "POSIX filesystem CAS adapter, tests, ecosystem path binding"
+    },
+    {
+      "repository": "FLOWACTIONSELFWORK",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "38e6476493079a449d20991697da80ab400d9384",
+      "scope": "OURSELFLOW workflow, dispatch, runner and receipt"
+    },
+    {
+      "repository": "ALTONUMBUSELF",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "a9d6faed6ea3048aa4b848c31c8f86da43bf6cda",
+      "scope": "memory persistence binding"
+    },
+    {
+      "repository": "ourself-cloud-server-network",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "d72407cf8a95ee9c978dba2b49d18e79b32c7562",
+      "scope": "replication and recontact contract"
+    },
+    {
+      "repository": "self-protocol-suite",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "dc02d8d628bc96a0c9bba338bae79838f6483622",
+      "scope": "storage adapter wire protocol"
+    },
+    {
+      "repository": "ourself-core",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "7e9ec13bd510238bcad2cd704a3fc0bf0a75c6a0",
+      "scope": "ecosystem runtime symmetry architecture map"
+    },
+    {
+      "repository": "ourself-agent-bridge-kernel",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "ea6f06f1cbd8feb1e3e222b46803f6252e0cef58",
+      "scope": "operational event journal binding"
+    },
+    {
+      "repository": "ourself-agent-bridge",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "d334887cd07fa9277b22d22543319d604f5bef91",
+      "scope": "bridge persistence adapter boundary"
+    },
+    {
+      "repository": "Cognitive-Transmutation-Core",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "03e53538fae8bcad0a432dbf2d1973c76a714643",
+      "scope": "cognition state durability boundary"
+    },
+    {
+      "repository": "self-communication",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "21984851611cabedbd9f0028d4faa738fd9f78be",
+      "scope": "communication versus custody boundary"
+    }
+  ],
+  "host_observation": {
+    "runtime": "macOS ARM64",
+    "host": "OURSELFMAC.local",
+    "node": "v22.23.0",
+    "filesystem": "APFS",
+    "docker_cli_present": true,
+    "docker_daemon_reachable": false,
+    "colima_installed": true,
+    "colima_running": false,
+    "lima_installed": true,
+    "lima_default_instance_present": false,
+    "ollama_cli_present": true,
+    "ollama_server_reachable": false,
+    "qemu_system_aarch64_present": false,
+    "android_sdk_qemu_img_present": true,
+    "free_storage_kib": 12630912,
+    "available_storage_approx_gib": 12.04
+  },
+  "boundaries": {
+    "github_actions_used": false,
+    "main_branches_mutated": false,
+    "pr_merged": false,
+    "source_worktrees_mutated": false,
+    "canonical_storage_root_provisioned": false,
+    "replication_performed": false,
+    "credentials_created": false,
+    "vm_disk_created": false,
+    "vm_booted": false,
+    "adapter_authority_admitted": false,
+    "independent_custody_established": false
+  },
+  "next_gate": "Designate a durable storage volume and independently governed custody boundary; then provision a canonical DATASELF root and run host-crash, replica, and recontact conformance."
+}
