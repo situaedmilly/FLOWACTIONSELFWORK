@@ -14,10 +14,11 @@
     {"step_id":"FLOW-0005","operation":"EMIT_READBACK_VERIFIED_EXECUTION_RECEIPT","effect":"LOCAL_RECEIPT_WRITE","required":true}
   ],
   "test_command": ["npm","test"],
-  "schema_command_template": ["npx","--yes","ajv-cli@5","compile","--spec=draft2020","-s","<schema-path>"],
+  "schema_command_template": ["npx","--yes","--package=ajv-cli@5","--package=ajv-formats@3","ajv","compile","--spec=draft2020","-c","ajv-formats","-s","<schema-path>"],
   "schema_validator": {
     "name": "ajv-cli",
     "major_version": 5,
+    "formats_plugin": "ajv-formats@3",
     "cache_scope": "temporary workflow directory only",
     "network_install": "only if package is absent from the temporary cache"
   },
