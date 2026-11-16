@@ -7,13 +7,13 @@
   "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
   "status": "EXECUTED",
   "receipt": {
-    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-4d25842e-b792-4bba-8109-cc181fa6c3bc.json",
-    "sha256": "2c45e1d00e90dae212c2b96b136d5c011e67858851537672273240233f14b540"
+    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-c28ae8db-ce40-45e2-afd2-08420d317898.json",
+    "sha256": "2e6bf201fc6be4798e6368b4d69082842b1ce2609839c986bdee486c7c998b11"
   },
   "validated_results": {
     "processor_tests": {
       "status": "PASS",
-      "passed": 64,
+      "passed": 71,
       "failed": 0
     },
     "draft_2020_12_schemas": {
@@ -26,8 +26,13 @@
       "passed": 8,
       "failed": 0
     },
+    "registration_policy_tests": {
+      "status": "PASS",
+      "passed": 7,
+      "failed": 0
+    },
     "source_worktrees_unchanged": true,
-    "source_worktree_content_digest": "SHA-256 over exact bytes of 83 processor and 29 DATASELF files before/after"
+    "source_worktree_content_digest": "SHA-256 over exact bytes of all tracked and non-ignored untracked files; processor and DATASELF file counts and digests matched before/after"
   },
   "repository_artifacts": [
     {
