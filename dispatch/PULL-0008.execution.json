@@ -138,7 +138,28 @@
     "vm_booted": false,
     "adapter_authority_admitted": false,
     "independent_custody_established": false,
-    "local_canonical_store_provisioned": false
+    "local_canonical_store_provisioned": false,
+    "proposal_branches_written": true,
+    "draft_pull_requests_opened": true,
+    "prs_merged": false,
+    "canonical_store_root_provisioned": false,
+    "external_storage_volume_observed": false,
+    "current_mac_free_storage_approx_gib": 11.9,
+    "external_volume_inventory": "No external physical disk or mounted external data volume observed at /Volumes or via diskutil list external physical."
   },
-  "next_gate": "Designate durable storage volume and independent custody boundary; then provision canonical DATASELF root and run host-crash, replica, and recontact conformance."
+  "next_gate": "Designate durable storage volume and independent custody boundary; then provision canonical DATASELF root and run host-crash, replica, and recontact conformance.",
+  "review_prs": [
+    "situaedmilly/OURSELF-DATABASE-ESTATE#3",
+    "situaedmilly/OURSYSTEMSELFOPERATIN#2",
+    "situaedmilly/OURPROCESSORSELF#14",
+    "situaedmilly/FLOWACTIONSELFWORK#6",
+    "situaedmilly/ALTONUMBUSELF#1",
+    "situaedmilly/ourself-cloud-server-network#1",
+    "situaedmilly/self-protocol-suite#3",
+    "situaedmilly/ourself-core#19",
+    "situaedmilly/ourself-agent-bridge-kernel#26",
+    "situaedmilly/ourself-agent-bridge#1",
+    "situaedmilly/Cognitive-Transmutation-Core#10",
+    "situaedmilly/self-communication#9"
+  ]
 }
