@@ -1,0 +1,31 @@
+{
+  "dispatch_id": "DISPATCH-0006",
+  "input_id": "INPUT-0006",
+  "pull_id": "PULL-0006",
+  "thought_id": "THOUGHT-0006",
+  "gate_id": "GATE-VM-PAYLOAD-DECLARATION-001",
+  "source_instance_id": "CHATGPT_INSTANCE_001",
+  "target_instance_id": "OURSELFLOW-VM-PAYLOAD-EXECUTOR",
+  "action": "VALIDATE_VM_PAYLOAD_DECLARATION",
+  "execution_required": true,
+  "action_repo": "situaedmilly/FLOWACTIONSELFWORK",
+  "data_repo": "situaedmilly/OURSELF-DATABASE-ESTATE",
+  "data_ref": "reverself/vm-payload-genesis-v0.1",
+  "manifest_path": "VM_PAYLOADS/REVERSELF-WINARM64-GENESIS-001/manifest.json",
+  "build_spec_path": "VM_PAYLOADS/REVERSELF-WINARM64-GENESIS-001/build-spec.json",
+  "workflow_path": "runtime/reverself-vm-payload/WORKFLOW.json",
+  "status": "DISPATCHED",
+  "authority": "EXPLICIT_USER_EXECUTION_REQUEST",
+  "execution_scope": "READ_ONLY_DECLARATION_VALIDATION_AND_BUILD_PLAN_EMISSION",
+  "prohibited_effects": [
+    "ORIGINAL_VM_ACCESS_OR_MUTATION",
+    "QEMU_INSTALLATION",
+    "PACKAGE_INSTALLATION",
+    "DISK_MATERIALIZATION",
+    "FIRMWARE_MUTATION",
+    "VM_BOOT",
+    "LAUNCH_ADMISSION",
+    "GITHUB_ACTIONS_EXECUTION"
+  ],
+  "note": "This dispatch binds the newly manifested payload to OURSELFLOW. Dispatch does not assert execution, assembly, admission, or boot."
+}
