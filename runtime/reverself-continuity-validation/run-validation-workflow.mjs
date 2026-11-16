@@ -97,7 +97,7 @@ for (const item of SCHEMAS) {
     schemaResults.push({schema:item.path,source:item.key,status:"MISSING",exit_code:null,stdout:"",stderr:"schema file not found"});
     continue;
   }
-  const result = run("npx",["--yes","ajv-cli@5","compile","--spec=draft2020","-s",schemaPath],{
+  const result = run("npx",["--yes","--package=ajv-cli@5","--package=ajv-formats@3","ajv","compile","--spec=draft2020","-c","ajv-formats","-s",schemaPath],{
     cwd:tempRoot,timeout:120000,
     env:{PATH:process.env.PATH||"/usr/bin:/bin",HOME:process.env.HOME||"/tmp",LANG:"C.UTF-8",npm_config_cache:npmCache,npm_config_audit:"false",npm_config_fund:"false",npm_config_update_notifier:"false"}
   });
@@ -134,7 +134,7 @@ const receipt = {
     data_before_sha256:before.data,data_after_sha256:after.data,
     unchanged:before.processor===after.processor && before.data===after.data
   },
-  dependency_scope:{validator:"ajv-cli@5",cache_path:npmCache,global_install:false,repository_install:false},
+  dependency_scope:{validator:"ajv-cli@5 + ajv-formats@3",cache_path:npmCache,global_install:false,repository_install:false},
   effects:{test_execution_performed:true,schema_validation_performed:true,source_worktrees_modified:false,main_branch_modified:false,github_actions_used:false,external_actuation:false},
   temporary_root:tempRoot
 };
