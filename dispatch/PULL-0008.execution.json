@@ -13,7 +13,7 @@
   "validated_results": {
     "processor_tests": {
       "status": "PASS",
-      "passed": 75,
+      "passed": 74,
       "failed": 0
     },
     "draft_2020_12_schemas": {
@@ -28,7 +28,7 @@
     },
     "registration_policy_tests": {
       "status": "PASS",
-      "passed": 9,
+      "passed": 8,
       "failed": 0
     },
     "source_worktrees_unchanged": true,
