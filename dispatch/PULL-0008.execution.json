@@ -7,8 +7,8 @@
   "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
   "status": "EXECUTED",
   "receipt": {
-    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-108e37e0-08f8-42d1-841c-953575344bf9.json",
-    "sha256": "8bd271bd6914111b621680a46b2204b7477cbf5c54de1d8e6469450d9bdc156f"
+    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-4d25842e-b792-4bba-8109-cc181fa6c3bc.json",
+    "sha256": "2c45e1d00e90dae212c2b96b136d5c011e67858851537672273240233f14b540"
   },
   "validated_results": {
     "processor_tests": {
@@ -26,7 +26,8 @@
       "passed": 8,
       "failed": 0
     },
-    "source_worktrees_unchanged": true
+    "source_worktrees_unchanged": true,
+    "source_worktree_content_digest": "SHA-256 over exact bytes of 83 processor and 29 DATASELF files before/after"
   },
   "repository_artifacts": [
     {
@@ -131,7 +132,8 @@
     "vm_disk_created": false,
     "vm_booted": false,
     "adapter_authority_admitted": false,
-    "independent_custody_established": false
+    "independent_custody_established": false,
+    "local_canonical_store_provisioned": false
   },
-  "next_gate": "Designate a durable storage volume and independently governed custody boundary; then provision a canonical DATASELF root and run host-crash, replica, and recontact conformance."
+  "next_gate": "Designate durable storage volume and independent custody boundary; then provision canonical DATASELF root and run host-crash, replica, and recontact conformance."
 }
