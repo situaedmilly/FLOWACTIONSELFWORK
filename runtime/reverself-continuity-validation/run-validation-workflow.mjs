@@ -54,6 +54,16 @@ function archiveRef(repoPath, branch, destination) {
 }
 const args = Object.fromEntries(process.argv.slice(2).reduce((out,item,i,all)=>{if(item.startsWith("--"))out.push([item.slice(2),all[i+1]]);return out;},[]));
 requireValue(args["repo-root"] && args["receipt-dir"], "required args: --repo-root and --receipt-dir");
+const dispatch = await readJson(path.resolve(args.dispatch));
+const workflow = await readJson(path.resolve(args.workflow));
+const expectedOps = ["FETCH_EXACT_SOURCE_REFS","CREATE_TEMPORARY_SOURCE_TREES","RUN_OURPROCESSORSELF_NPM_TEST","COMPILE_DATASELF_DRAFT_2020_12_SCHEMAS","EMIT_READBACK_VERIFIED_EXECUTION_RECEIPT"];
+requireValue(dispatch.dispatch_id === "DISPATCH-0007" && dispatch.pull_id === "PULL-0007" && dispatch.action === "EXECUTE_REVERSELF_TEST_AND_SCHEMA_VALIDATION", "dispatch identity/action mismatch");
+requireValue(dispatch.status === "DISPATCHED" && dispatch.authority === "EXPLICIT_USER_EXECUTION_REQUEST" && dispatch.execution_scope === "READ_ONLY_REPO_TESTS_AND_SCHEMA_COMPILE", "dispatch authority/scope mismatch");
+requireValue(workflow.workflow_id === "OURSELFLOW-REVERSELF-CONTINUITY-VALIDATION-001" && workflow.dispatch_id === dispatch.dispatch_id && workflow.pull_id === dispatch.pull_id && workflow.orchestrator === "FLOWACTIONSELFWORK", "workflow identity/orchestrator mismatch");
+requireValue(Array.isArray(workflow.steps) && workflow.steps.length === expectedOps.length && workflow.steps.every((step,i)=>step.operation===expectedOps[i]), "workflow step order mismatch");
+requireValue(dispatch.prohibited_effects.includes("GITHUB_ACTIONS_EXECUTION") && dispatch.prohibited_effects.includes("MAIN_BRANCH_MUTATION") && dispatch.prohibited_effects.includes("GLOBAL_PACKAGE_INSTALLATION"), "prohibited effects missing from dispatch");
+requireValue(dispatch.sources?.length === 3 && dispatch.sources.some(s=>s.repository==="situaedmilly/OURPROCESSORSELF" && s.ref===EXPECTED.processor.branch) && dispatch.sources.some(s=>s.repository==="situaedmilly/OURSELF-DATABASE-ESTATE" && s.ref===EXPECTED.data.branch) && dispatch.sources.some(s=>s.repository==="situaedmilly/OURSELF-DATABASE-ESTATE" && s.ref===EXPECTED.payload.branch), "dispatch source refs mismatch");
+const workflowBindingPass = true;
 const root = path.resolve(args["repo-root"]);
 const receiptDir = path.resolve(args["receipt-dir"]);
 const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(),"ourselflow-continuity-"));
@@ -99,17 +109,17 @@ for (const key of ["processor","data"]) {
   after[key] = sha256(status.stdout);
 }
 const allSchemasPass = schemaResults.length===SCHEMAS.length && schemaResults.every(x=>x.status==="PASS");
-const allPass = testResult.status==="PASS" && allSchemasPass && before.processor===after.processor && before.data===after.data;
+const allPass = workflowBindingPass && testResult.status==="PASS" && allSchemasPass && before.processor===after.processor && before.data===after.data;
 const receipt = {
   schema_version:"ourself.flow-validation-receipt.v1",
   receipt_id:"FLOW-VALIDATION-" + crypto.randomUUID(),
   timestamp_utc:new Date().toISOString(),
-  workflow_id:"OURSELFLOW-REVERSELF-CONTINUITY-VALIDATION-001",
+  workflow_id:workflow.workflow_id,\n  dispatch_id:dispatch.dispatch_id,\n  pull_id:dispatch.pull_id,\n  dispatch_sha256:sha256(canonical(dispatch)),\n  workflow_sha256:sha256(canonical(workflow)),
   dispatch_id:"DISPATCH-0007",
   pull_id:"PULL-0007",
   orchestrator:"FLOWACTIONSELFWORK",
   executor:"OURSELFLOW-VALIDATION-EXECUTOR",
-  disposition:allPass?"VALIDATION_PASSED":"VALIDATION_FAILED_OR_BLOCKED",
+  disposition:allPass?"VALIDATION_PASSED":"VALIDATION_FAILED_OR_BLOCKED",\n  workflow_binding:{status:"PASS",dispatch_id:dispatch.dispatch_id,pull_id:dispatch.pull_id},
   source_refs:refs,
   package_test:{command:"npm test",...testResult},
   schema_compilation:schemaResults,
@@ -132,7 +142,7 @@ requireValue(readback===output,"workflow receipt read-back mismatch");
 const parsed=JSON.parse(readback);const claimed=parsed.receipt_sha256;delete parsed.receipt_sha256;
 requireValue(claimed===sha256(canonical(parsed)),"workflow receipt digest mismatch");
 console.log(JSON.stringify({
-  disposition:receipt.disposition,
+  disposition:receipt.disposition,\n  workflow_binding:"PASS",
   receipt_id:receipt.receipt_id,
   receipt_path:receiptPath,
   receipt_sha256:claimed,
