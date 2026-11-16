@@ -38,7 +38,7 @@
     {
       "repository": "OURSELF-DATABASE-ESTATE",
       "branch": "architecture/runtime-symmetric-storage-v0.1",
-      "commit": "dadcef8c5318b0e969be98299a93bd27e5543c7b",
+      "commit": "e4dcfefe20125d70b68e5b62eda017f9fe765c9c",
       "scope": "canonical storage contract, registration schema, runtime adapter registry, conformance matrix"
     },
     {
@@ -56,7 +56,7 @@
     {
       "repository": "FLOWACTIONSELFWORK",
       "branch": "architecture/runtime-symmetric-storage-v0.1",
-      "commit": "50c894e2fdf8627564f3f86ae6bfab4f80dcaa17",
+      "commit": "ccfe80d972c5f004bfc2b13f92e839ad3d48615a",
       "scope": "OURSELFLOW workflow, dispatch, runner and receipt"
     },
     {
