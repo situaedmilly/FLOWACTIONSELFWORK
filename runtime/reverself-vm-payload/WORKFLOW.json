@@ -1,0 +1,79 @@
+{
+  "workflow_id": "OURSELFLOW-REVERSELF-VM-PAYLOAD-GENESIS-001",
+  "schema_version": "ourself.flow.v1",
+  "dispatch_id": "DISPATCH-0006",
+  "pull_id": "PULL-0006",
+  "authority": "EXPLICIT_USER_EXECUTION_REQUEST",
+  "orchestrator": "FLOWACTIONSELFWORK",
+  "executor": "OURSELFLOW-VM-PAYLOAD-EXECUTOR",
+  "source": {
+    "repository": "situaedmilly/OURSELF-DATABASE-ESTATE",
+    "ref": "reverself/vm-payload-genesis-v0.1",
+    "manifest": "VM_PAYLOADS/REVERSELF-WINARM64-GENESIS-001/manifest.json",
+    "build_spec": "VM_PAYLOADS/REVERSELF-WINARM64-GENESIS-001/build-spec.json",
+    "schema": "SCHEMAS/ourself-vm-payload.v1.schema.json"
+  },
+  "execution_mode": "BOUNDED_VALIDATION",
+  "steps": [
+    {
+      "step_id": "FLOW-0001",
+      "operation": "RESOLVE_DECLARATION",
+      "effect": "READ_ONLY",
+      "required": true
+    },
+    {
+      "step_id": "FLOW-0002",
+      "operation": "VALIDATE_SCHEMA_AND_IDENTITY_BINDING",
+      "effect": "READ_ONLY",
+      "required": true
+    },
+    {
+      "step_id": "FLOW-0003",
+      "operation": "VALIDATE_COMPONENT_ROLE_COVERAGE",
+      "effect": "READ_ONLY",
+      "required": true
+    },
+    {
+      "step_id": "FLOW-0004",
+      "operation": "VALIDATE_BUILD_ORDER_AND_STOP_CONDITIONS",
+      "effect": "READ_ONLY",
+      "required": true
+    },
+    {
+      "step_id": "FLOW-0005",
+      "operation": "EMIT_DECLARATION_VALIDATION_RECEIPT",
+      "effect": "LOCAL_RECEIPT_WRITE",
+      "required": true
+    }
+  ],
+  "next_workflow": [
+    "RESOLVE_OFFICIAL_INSTALLER_MEDIA",
+    "RESOLVE_COMPATIBLE_FIRMWARE",
+    "INSPECT_EXISTING_HOST_HYPERVISOR",
+    "SELECT_RUNTIME_ADAPTER",
+    "MATERIALIZE_NEW_GUEST_DISK",
+    "ASSEMBLE_DATASELF_ENVELOPE",
+    "VERIFY_COMPONENT_HASHES",
+    "CREATE_PRESERVATION_COPY",
+    "REQUEST_LAUNCH_ADMISSION",
+    "BOOT_AND_OBSERVE"
+  ],
+  "stop_conditions": [
+    "Manifest, build specification or schema cannot be resolved",
+    "Payload identity or artifact binding is inconsistent",
+    "Required artifact role is missing or duplicated",
+    "Runtime selection is unresolved",
+    "Installation media provenance or licensing is unresolved",
+    "Firmware compatibility is unresolved",
+    "Any requested effect exceeds this workflow's read-only declaration-validation scope"
+  ],
+  "completion_state": "DECLARATION_VALIDATED_BUILD_PENDING",
+  "non_claims": [
+    "PAYLOAD_NOT_MATERIALIZED",
+    "NO_GUEST_DISK_BYTES_CREATED",
+    "NO_FIRMWARE_BYTES_CREATED",
+    "NO_INSTALLER_MEDIA_ACQUIRED",
+    "NO_LAUNCH_AUTHORITY_GRANTED",
+    "NO_VM_BOOT_PERFORMED"
+  ]
+}
