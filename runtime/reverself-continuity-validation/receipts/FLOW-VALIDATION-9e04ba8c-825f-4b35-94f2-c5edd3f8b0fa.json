@@ -1,0 +1,91 @@
+{
+  "schema_version": "ourself.flow-validation-receipt.v1",
+  "receipt_id": "FLOW-VALIDATION-9e04ba8c-825f-4b35-94f2-c5edd3f8b0fa",
+  "timestamp_utc": "2026-11-16T22:14:29.269Z",
+  "workflow_id": "OURSELFLOW-REVERSELF-CONTINUITY-VALIDATION-001",
+  "dispatch_id": "DISPATCH-0007",
+  "pull_id": "PULL-0007",
+  "dispatch_sha256": "a2ddb871b633c81cfc8c43caac737a3f828e4780d96d246960b1e86d93bfc97a",
+  "workflow_sha256": "6530675ab1af080c2c665ddcde38b73f362f816fd93336dfea6711ba2d031489",
+  "orchestrator": "FLOWACTIONSELFWORK",
+  "executor": "OURSELFLOW-VALIDATION-EXECUTOR",
+  "disposition": "VALIDATION_PASSED",
+  "workflow_binding": {
+    "status": "PASS",
+    "dispatch_id": "DISPATCH-0007",
+    "pull_id": "PULL-0007"
+  },
+  "source_refs": {
+    "processor": {
+      "commit_sha": "53cf6a22479172174d13ea19996563f4ad4ce6dc",
+      "fetch_status": "PASS",
+      "archive_status": "PASS"
+    },
+    "data": {
+      "commit_sha": "04d6fa013813ae6da80c11fb46d6f6da8d2850ab",
+      "fetch_status": "PASS",
+      "archive_status": "PASS"
+    },
+    "payload": {
+      "commit_sha": "8629c64ca5b9572cca7e35a30c5805c428872578",
+      "fetch_status": "PASS",
+      "archive_status": "PASS"
+    }
+  },
+  "package_test": {
+    "command": "npm test",
+    "status": "PASS",
+    "exit_code": 0,
+    "error": null,
+    "stdout": "56 tests passed; 0 failed. Node test runner reported 1..56 and duration 727.385083 ms."
+  },
+  "schema_compilation": [
+    {
+      "schema": "SCHEMAS/ourdata-envelope.v1.schema.json",
+      "source": "data",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "schema": "SCHEMAS/ourdata-transition.v1.schema.json",
+      "source": "data",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "schema": "SCHEMAS/reverself-continuity-profile.v1.schema.json",
+      "source": "data",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "schema": "SCHEMAS/ourself-vm-payload.v1.schema.json",
+      "source": "payload",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "source_worktree_immutability": {
+    "processor_before_sha256": "6f406dcea079fa2d3d2403f70c42426dcb66380ed752807a5dc88e4395854a0b",
+    "processor_after_sha256": "6f406dcea079fa2d3d2403f70c42426dcb66380ed752807a5dc88e4395854a0b",
+    "data_before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data_after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unchanged": true
+  },
+  "dependency_scope": {
+    "validator": "ajv-cli@5 + ajv-formats@3",
+    "global_install": false,
+    "repository_install": false,
+    "cache_scope": "temporary workflow directory"
+  },
+  "effects": {
+    "test_execution_performed": true,
+    "schema_validation_performed": true,
+    "source_worktrees_modified": false,
+    "main_branch_modified": false,
+    "github_actions_used": false,
+    "external_actuation": false
+  },
+  "temporary_root": "/var/folders/vw/6tcwnxxs2_jg1psbzgn_jsbr0000gn/T/ourselflow-continuity-EDcJF3",
+  "receipt_sha256": "30f874a4516829c7ac95bee715e890c9192b2e44593d7de598668a3133d85e15"
+}
