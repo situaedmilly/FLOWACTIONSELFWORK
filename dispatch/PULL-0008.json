@@ -46,6 +46,26 @@
       "repository": "situaedmilly/ourself-core",
       "ref": "architecture/runtime-symmetric-storage-v0.1",
       "operation": "VERIFY_ECOSYSTEM_MAP_PRESENT"
+    },
+    {
+      "repository": "situaedmilly/ourself-agent-bridge-kernel",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_OPERATIONAL_EVENT_BINDING"
+    },
+    {
+      "repository": "situaedmilly/ourself-agent-bridge",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_PERSISTENCE_BOUNDARY"
+    },
+    {
+      "repository": "situaedmilly/Cognitive-Transmutation-Core",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_COGNITION_VOLATILITY_BOUNDARY"
+    },
+    {
+      "repository": "situaedmilly/self-communication",
+      "ref": "architecture/runtime-symmetric-storage-v0.1",
+      "operation": "VERIFY_COMMUNICATION_CUSTODY_BOUNDARY"
     }
   ],
   "prohibited_effects": [
