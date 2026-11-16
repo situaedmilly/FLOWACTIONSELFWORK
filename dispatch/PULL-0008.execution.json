@@ -7,13 +7,13 @@
   "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
   "status": "EXECUTED",
   "receipt": {
-    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-c28ae8db-ce40-45e2-afd2-08420d317898.json",
-    "sha256": "2e6bf201fc6be4798e6368b4d69082842b1ce2609839c986bdee486c7c998b11"
+    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-a7b3b5fe-e76f-4db2-88f9-522fd151142e.json",
+    "sha256": "9635b8337d68ff450afd8e219260df11eaa302b29db58dc2748686d3ef25c507"
   },
   "validated_results": {
     "processor_tests": {
       "status": "PASS",
-      "passed": 71,
+      "passed": 72,
       "failed": 0
     },
     "draft_2020_12_schemas": {
@@ -28,7 +28,7 @@
     },
     "registration_policy_tests": {
       "status": "PASS",
-      "passed": 7,
+      "passed": 8,
       "failed": 0
     },
     "source_worktrees_unchanged": true,
