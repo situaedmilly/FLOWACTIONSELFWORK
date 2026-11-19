@@ -1,0 +1,165 @@
+{
+  "execution_id": "EXECUTION-0008",
+  "dispatch_id": "DISPATCH-0008",
+  "pull_id": "PULL-0008",
+  "gate_id": "GATE-RUNTIME-SYMMETRIC-STORAGE-001",
+  "executor_instance_id": "OURSELFMAC.local",
+  "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
+  "status": "EXECUTED",
+  "receipt": {
+    "path": "runtime/runtime-symmetric-storage/receipts/FLOW-STORAGE-e1479a55-1155-4f51-8931-299da79787cc.json",
+    "sha256": "c56e7765b35f9876ac4892fe9d8bfd988ca04ad56f2e665bd6a206c0abef2cd7"
+  },
+  "validated_results": {
+    "processor_tests": {
+      "status": "PASS",
+      "passed": 74,
+      "failed": 0
+    },
+    "draft_2020_12_schemas": {
+      "status": "PASS",
+      "passed": 3,
+      "failed": 0
+    },
+    "posix_adapter_tests": {
+      "status": "PASS",
+      "passed": 10,
+      "failed": 0
+    },
+    "registration_policy_tests": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0
+    },
+    "source_worktrees_unchanged": true,
+    "source_worktree_content_digest": "SHA-256 over exact bytes of all tracked and non-ignored untracked files; processor and DATASELF file counts and digests matched before/after"
+  },
+  "repository_artifacts": [
+    {
+      "repository": "OURSELF-DATABASE-ESTATE",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "a36eaf0affc6077a3c603fb3ad353a20a6e2861e",
+      "scope": "canonical storage contract, registration schema, runtime adapter registry, conformance matrix"
+    },
+    {
+      "repository": "OURSYSTEMSELFOPERATIN",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "fbaf25968dd21b59902d98e04f4b95735e2823e9",
+      "scope": "OSOS constitutional storage symmetry contract"
+    },
+    {
+      "repository": "OURPROCESSORSELF",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "df45e62d1cf0adebdbd1439191d274893822b79f",
+      "scope": "POSIX filesystem CAS adapter, tests, ecosystem path binding"
+    },
+    {
+      "repository": "FLOWACTIONSELFWORK",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "02a96716894ffe77ff04b927940dad27fe14c891",
+      "scope": "OURSELFLOW workflow, dispatch, runner and receipt"
+    },
+    {
+      "repository": "ALTONUMBUSELF",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "a9d6faed6ea3048aa4b848c31c8f86da43bf6cda",
+      "scope": "memory persistence binding"
+    },
+    {
+      "repository": "ourself-cloud-server-network",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "d72407cf8a95ee9c978dba2b49d18e79b32c7562",
+      "scope": "replication and recontact contract"
+    },
+    {
+      "repository": "self-protocol-suite",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "dc02d8d628bc96a0c9bba338bae79838f6483622",
+      "scope": "storage adapter wire protocol"
+    },
+    {
+      "repository": "ourself-core",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "7e9ec13bd510238bcad2cd704a3fc0bf0a75c6a0",
+      "scope": "ecosystem runtime symmetry architecture map"
+    },
+    {
+      "repository": "ourself-agent-bridge-kernel",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "ea6f06f1cbd8feb1e3e222b46803f6252e0cef58",
+      "scope": "operational event journal binding"
+    },
+    {
+      "repository": "ourself-agent-bridge",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "d334887cd07fa9277b22d22543319d604f5bef91",
+      "scope": "bridge persistence adapter boundary"
+    },
+    {
+      "repository": "Cognitive-Transmutation-Core",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "03e53538fae8bcad0a432dbf2d1973c76a714643",
+      "scope": "cognition state durability boundary"
+    },
+    {
+      "repository": "self-communication",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit": "21984851611cabedbd9f0028d4faa738fd9f78be",
+      "scope": "communication versus custody boundary"
+    }
+  ],
+  "host_observation": {
+    "runtime": "macOS ARM64",
+    "host": "OURSELFMAC.local",
+    "node": "v22.23.0",
+    "filesystem": "APFS",
+    "docker_cli_present": true,
+    "docker_daemon_reachable": false,
+    "colima_installed": true,
+    "colima_running": false,
+    "lima_installed": true,
+    "lima_default_instance_present": false,
+    "ollama_cli_present": true,
+    "ollama_server_reachable": false,
+    "qemu_system_aarch64_present": false,
+    "android_sdk_qemu_img_present": true,
+    "free_storage_kib": 12630912,
+    "available_storage_approx_gib": 12.04
+  },
+  "boundaries": {
+    "github_actions_used": false,
+    "main_branches_mutated": false,
+    "pr_merged": false,
+    "source_worktrees_mutated": false,
+    "canonical_storage_root_provisioned": false,
+    "replication_performed": false,
+    "credentials_created": false,
+    "vm_disk_created": false,
+    "vm_booted": false,
+    "adapter_authority_admitted": false,
+    "independent_custody_established": false,
+    "local_canonical_store_provisioned": false,
+    "proposal_branches_written": true,
+    "draft_pull_requests_opened": true,
+    "prs_merged": false,
+    "canonical_store_root_provisioned": false,
+    "external_storage_volume_observed": false,
+    "current_mac_free_storage_approx_gib": 11.9,
+    "external_volume_inventory": "No external physical disk or mounted external data volume observed at /Volumes or via diskutil list external physical."
+  },
+  "next_gate": "Designate durable storage volume and independent custody boundary; then provision canonical DATASELF root and run host-crash, replica, and recontact conformance.",
+  "review_prs": [
+    "situaedmilly/OURSELF-DATABASE-ESTATE#3",
+    "situaedmilly/OURSYSTEMSELFOPERATIN#2",
+    "situaedmilly/OURPROCESSORSELF#14",
+    "situaedmilly/FLOWACTIONSELFWORK#6",
+    "situaedmilly/ALTONUMBUSELF#1",
+    "situaedmilly/ourself-cloud-server-network#1",
+    "situaedmilly/self-protocol-suite#3",
+    "situaedmilly/ourself-core#19",
+    "situaedmilly/ourself-agent-bridge-kernel#26",
+    "situaedmilly/ourself-agent-bridge#1",
+    "situaedmilly/Cognitive-Transmutation-Core#10",
+    "situaedmilly/self-communication#9"
+  ]
+}

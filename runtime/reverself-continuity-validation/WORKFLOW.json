@@ -1,0 +1,46 @@
+{
+  "workflow_id": "OURSELFLOW-REVERSELF-CONTINUITY-VALIDATION-001",
+  "schema_version": "ourself.flow.v1",
+  "dispatch_id": "DISPATCH-0007",
+  "pull_id": "PULL-0007",
+  "orchestrator": "FLOWACTIONSELFWORK",
+  "executor": "OURSELFLOW-VALIDATION-EXECUTOR",
+  "execution_mode": "BOUNDED_TEMPORARY_VALIDATION",
+  "steps": [
+    {"step_id":"FLOW-0001","operation":"FETCH_EXACT_SOURCE_REFS","effect":"READ_ONLY_GIT_FETCH","required":true},
+    {"step_id":"FLOW-0002","operation":"CREATE_TEMPORARY_SOURCE_TREES","effect":"TEMPORARY_FILE_CREATION","required":true},
+    {"step_id":"FLOW-0003","operation":"RUN_OURPROCESSORSELF_NPM_TEST","effect":"LOCAL_TEST_EXECUTION","required":true},
+    {"step_id":"FLOW-0004","operation":"COMPILE_DATASELF_DRAFT_2020_12_SCHEMAS","effect":"LOCAL_SCHEMA_VALIDATION","required":true},
+    {"step_id":"FLOW-0005","operation":"EMIT_READBACK_VERIFIED_EXECUTION_RECEIPT","effect":"LOCAL_RECEIPT_WRITE","required":true}
+  ],
+  "test_command": ["npm","test"],
+  "schema_command_template": ["npx","--yes","--package=ajv-cli@5","--package=ajv-formats@3","ajv","compile","--spec=draft2020","-c","ajv-formats","-s","<schema-path>"],
+  "schema_validator": {
+    "name": "ajv-cli",
+    "major_version": 5,
+    "formats_plugin": "ajv-formats@3",
+    "cache_scope": "temporary workflow directory only",
+    "network_install": "only if package is absent from the temporary cache"
+  },
+  "source_policy": {
+    "checkout_mode": "git archive from fetched immutable FETCH_HEAD",
+    "working_tree_mutation": false,
+    "source_branch_mutation": false,
+    "main_branch_mutation": false
+  },
+  "stop_conditions": [
+    "Any source ref cannot be fetched",
+    "Any test process exits non-zero or times out",
+    "Any schema compilation exits non-zero",
+    "Temporary source tree does not match the requested branch content",
+    "Any command would require global installation or source repository mutation"
+  ],
+  "completion_state": "VALIDATION_EXECUTED_WITH_RECEIPT",
+  "non_claims": [
+    "NO_GITHUB_ACTIONS",
+    "NO_SOURCE_REPOSITORY_MUTATION",
+    "NO_MAIN_BRANCH_MUTATION",
+    "NO_PRODUCTION_DEPLOYMENT",
+    "NO_VM_ACTUATION"
+  ]
+}

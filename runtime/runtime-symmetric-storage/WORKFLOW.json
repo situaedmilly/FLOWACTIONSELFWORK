@@ -1,0 +1,59 @@
+{
+  "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
+  "schema_version": "ourself.flow.v1",
+  "dispatch_id": "DISPATCH-0008",
+  "pull_id": "PULL-0008",
+  "orchestrator": "FLOWACTIONSELFWORK",
+  "purpose": "Execute bounded local conformance tests and schema compilation for the runtime-symmetric storage contract.",
+  "steps": [
+    {
+      "step_id": "STORAGE-0001",
+      "operation": "FETCH_EXACT_CONTRACT_AND_PROCESSOR_REFS",
+      "effect": "READ_ONLY_GIT_FETCH",
+      "required": true
+    },
+    {
+      "step_id": "STORAGE-0002",
+      "operation": "ARCHIVE_SOURCES_TO_TEMPORARY_TREES",
+      "effect": "TEMPORARY_FILE_CREATION",
+      "required": true
+    },
+    {
+      "step_id": "STORAGE-0003",
+      "operation": "RUN_PROCESSOR_NPM_TEST",
+      "effect": "LOCAL_TEST_EXECUTION",
+      "required": true
+    },
+    {
+      "step_id": "STORAGE-0004",
+      "operation": "COMPILE_DATASELF_DRAFT_2020_12_SCHEMAS",
+      "effect": "LOCAL_SCHEMA_VALIDATION",
+      "required": true
+    },
+    {
+      "step_id": "STORAGE-0005",
+      "operation": "OBSERVE_HOST_RUNTIME_INVENTORY_READ_ONLY",
+      "effect": "READ_ONLY_HOST_OBSERVATION",
+      "required": true
+    },
+    {
+      "step_id": "STORAGE-0006",
+      "operation": "WRITE_AND_READBACK_EXECUTION_RECEIPT",
+      "effect": "LOCAL_RECEIPT_WRITE",
+      "required": true
+    }
+  ],
+  "prohibited_effects": [
+    "GITHUB_ACTIONS_EXECUTION",
+    "MAIN_BRANCH_MUTATION",
+    "SOURCE_WORKTREE_CHECKOUT_OR_RESET",
+    "GLOBAL_PACKAGE_INSTALLATION",
+    "CANONICAL_STORE_PROVISIONING",
+    "REPLICATION",
+    "CREDENTIAL_CREATION",
+    "QEMU_INSTALLATION",
+    "VM_DISK_CREATION",
+    "VM_BOOT"
+  ],
+  "completion_state": "VALIDATION_EXECUTED_WITH_RECEIPT"
+}

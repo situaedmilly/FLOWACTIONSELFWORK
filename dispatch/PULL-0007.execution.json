@@ -1,0 +1,48 @@
+{
+  "execution_id": "EXECUTION-0007",
+  "dispatch_id": "DISPATCH-0007",
+  "pull_id": "PULL-0007",
+  "gate_id": "GATE-REVERSELF-CONTINUITY-VALIDATION-001",
+  "executor_instance_id": "OURSELFMAC.local",
+  "action": "EXECUTE_REVERSELF_TEST_AND_SCHEMA_VALIDATION",
+  "status": "EXECUTED",
+  "executed_at": "2026-11-16T22:14:29.269Z",
+  "workflow_id": "OURSELFLOW-REVERSELF-CONTINUITY-VALIDATION-001",
+  "receipt": {
+    "path": "runtime/reverself-continuity-validation/receipts/FLOW-VALIDATION-9e04ba8c-825f-4b35-94f2-c5edd3f8b0fa.json",
+    "sha256": "30f874a4516829c7ac95bee715e890c9192b2e44593d7de598668a3133d85e15"
+  },
+  "source_commits": {
+    "OURPROCESSORSELF": "53cf6a22479172174d13ea19996563f4ad4ce6dc",
+    "OURSELF-DATABASE-ESTATE_CONTINUITY": "04d6fa013813ae6da80c11fb46d6f6da8d2850ab",
+    "OURSELF-DATABASE-ESTATE_VM_PAYLOAD": "8629c64ca5b9572cca7e35a30c5805c428872578"
+  },
+  "results": {
+    "OURPROCESSORSELF_npm_test": {"status":"PASS","passed":56,"failed":0},
+    "Draft_2020_12_schema_compilation": {
+      "status":"PASS",
+      "passed":4,
+      "failed":0,
+      "schemas": [
+        "SCHEMAS/ourdata-envelope.v1.schema.json",
+        "SCHEMAS/ourdata-transition.v1.schema.json",
+        "SCHEMAS/reverself-continuity-profile.v1.schema.json",
+        "SCHEMAS/ourself-vm-payload.v1.schema.json"
+      ],
+      "validator": "ajv-cli@5 + ajv-formats@3"
+    }
+  },
+  "source_worktrees": {
+    "processor_unchanged": true,
+    "data_unchanged": true,
+    "method": "git status --porcelain SHA-256 before and after; source branches fetched and archived into temporary trees"
+  },
+  "effects": {
+    "github_actions_used": false,
+    "source_repository_mutation": false,
+    "main_branch_mutation": false,
+    "global_dependency_installation": false,
+    "repository_dependency_installation": false,
+    "external_actuation": false
+  }
+}

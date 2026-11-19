@@ -1,0 +1,110 @@
+{
+  "schema_version": "ourself.flow-runtime-storage-receipt.v1",
+  "receipt_id": "FLOW-STORAGE-b4e76ff4-56f2-457c-a44e-1414a95219a0",
+  "observed_at": "2026-11-16T23:47:40.593Z",
+  "workflow_id": "OURSELFLOW-RUNTIME-SYMMETRIC-STORAGE-001",
+  "dispatch_id": "DISPATCH-0008",
+  "pull_id": "PULL-0008",
+  "disposition": "VALIDATION_PASSED",
+  "source_refs": {
+    "processor": {
+      "repository": "OURPROCESSORSELF",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit_sha": "c1315bb7b5c452436cc9764d1044609bdf541ba0"
+    },
+    "data": {
+      "repository": "OURSELF-DATABASE-ESTATE",
+      "branch": "architecture/runtime-symmetric-storage-v0.1",
+      "commit_sha": "07ee9b1ea9a24e0d585f2515519e2fd06928a180"
+    }
+  },
+  "processor_test": {
+    "command": "npm test",
+    "status": "PASS",
+    "exit_code": 0,
+    "stdout": "\n> ourprocessorself@0.1.0 test\n> node --test test/processor.test.mjs test/repository-machine.test.mjs test/repository-machine.pressure.test.mjs test/causal-lineage.test.mjs test/repository-actuator.test.mjs test/causal-actuation.test.mjs test/verified-continuation.test.mjs test/verified-continuation.runtime.test.mjs test/continuity-profile.test.mjs test/continuity-resolver.test.mjs test/continuity-transition-journal.test.mjs test/continuity-boot-launch-gate.test.mjs test/storage-posix-filesystem-cas.test.mjs test/storage-registration.test.mjs\n\nTAP version 13\n# Subtest: v0.6 rejects mismatched lineage receipt\nok 1 - v0.6 rejects mismatched lineage receipt\n  ---\n  duration_ms: 182.576875\n  type: 'test'\n  ...\n# Subtest: v0.6 reaches actual Git ref only after actuator success\nok 2 - v0.6 reaches actual Git ref only after actuator success\n  ---\n  duration_ms: 188.758375\n  type: 'test'\n  ...\n# Subtest: v0.6 failed actuator yields no actual state\nok 3 - v0.6 failed actuator yields no actual state\n  ---\n  duration_ms: 135.11675\n  type: 'test'\n  ...\n# Subtest: causal binding rejects before processor execution\nok 4 - causal binding rejects before processor execution\n  ---\n  duration_ms: 1.34075\n  type: 'test'\n  ...\n# Subtest: causal lineage binds MCP → admission → instance → processor → evidence → repository state\nok 5 - causal lineage binds MCP → admission → instance → processor → evidence → repository state\n  ---\n  duration_ms: 1.71275\n  type: 'test'\n  ...\n# Subtest: boot launch gate remains blocked when evidence verifiers are absent\nok 6 - boot launch gate remains blocked when evidence verifiers are absent\n  ---\n  duration_ms: 0.758375\n  type: 'test'\n  ...\n# Subtest: boot launch gate requires evidence references, not boolean claims\nok 7 - boot launch gate requires evidence references, not boolean claims\n  ---\n  duration_ms: 0.198958\n  type: 'test'\n  ...\n# Subtest: complete independently supplied evidence can authorize the software gate but performs no effect\nok 8 - complete independently supplied evidence can authorize the software gate but performs no effect\n  ---\n  duration_ms: 0.093917\n  type: 'test'\n  ...\n# Subtest: structurally consistent profile never self-asserts restore readiness\nok 9 - structurally consistent profile never self-asserts restore readiness\n  ---\n  duration_ms: 1.882458\n  type: 'test'\n  ...\n# Subtest: ADMITTED is not interchangeable with INTEGRITY_VERIFIED\nok 10 - ADMITTED is not interchangeable with INTEGRITY_VERIFIED\n  ---\n  duration_ms: 0.214875\n  type: 'test'\n  ...\n# Subtest: missing original guest disk blocks restoration\nok 11 - missing original guest disk blocks restoration\n  ---\n  duration_ms: 0.264333\n  type: 'test'\n  ...\n# Subtest: duplicate component identities fail structural validation\nok 12 - duplicate component identities fail structural validation\n  ---\n  duration_ms: 0.070208\n  type: 'test'\n  ...\n# Subtest: unresolved component dependencies fail closed\nok 13 - unresolved component dependencies fail closed\n  ---\n  duration_ms: 0.128333\n  type: 'test'\n  ...\n# Subtest: envelope reference must match the bound canonical envelope identity\nok 14 - envelope reference must match the bound canonical envelope identity\n  ---\n  duration_ms: 0.058083\n  type: 'test'\n  ...\n# Subtest: content key must bind the declared payload digest\nok 15 - content key must bind the declared payload digest\n  ---\n  duration_ms: 0.089041\n  type: 'test'\n  ...\n# Subtest: every component in a required role is evaluated\nok 16 - every component in a required role is evaluated\n  ---\n  duration_ms: 0.053375\n  type: 'test'\n  ...\n# Subtest: unresolved transition event references block external lineage verification\nok 17 - unresolved transition event references block external lineage verification\n  ---\n  duration_ms: 0.221458\n  type: 'test'\n  ...\n# Subtest: unverified recovered status is rejected as a readiness claim\nok 18 - unverified recovered status is rejected as a readiness claim\n  ---\n  duration_ms: 0.234375\n  type: 'test'\n  ...\n# Subtest: source immutability is mandatory\nok 19 - source immutability is mandatory\n  ---\n  duration_ms: 0.098708\n  type: 'test'\n  ...\n# Subtest: quarantined payload blocks restoration\nok 20 - quarantined payload blocks restoration\n  ---\n  duration_ms: 0.09375\n  type: 'test'\n  ...\n# Subtest: missing envelope binding fails structural validation\nok 21 - missing envelope binding fails structural validation\n  ---\n  duration_ms: 0.040083\n  type: 'test'\n  ...\n# Subtest: unknown recovery lifecycle state fails structural validation\nok 22 - unknown recovery lifecycle state fails structural validation\n  ---\n  duration_ms: 0.035584\n  type: 'test'\n  ...\n# Subtest: firmware and dependency artifacts are mandatory for boot readiness\nok 23 - firmware and dependency artifacts are mandatory for boot readiness\n  ---\n  duration_ms: 0.5\n  type: 'test'\n  ...\n# Subtest: resolves canonical envelope, exact bytes and transition references\nok 24 - resolves canonical envelope, exact bytes and transition references\n  ---\n  duration_ms: 1.363584\n  type: 'test'\n  ...\n# Subtest: missing DATASELF envelope does not resolve\nok 25 - missing DATASELF envelope does not resolve\n  ---\n  duration_ms: 0.089416\n  type: 'test'\n  ...\n# Subtest: payload bytes are hashed rather than trusting envelope declarations\nok 26 - payload bytes are hashed rather than trusting envelope declarations\n  ---\n  duration_ms: 0.084916\n  type: 'test'\n  ...\n# Subtest: unresolved transition reference blocks resolution\nok 27 - unresolved transition reference blocks resolution\n  ---\n  duration_ms: 0.147208\n  type: 'test'\n  ...\n# Subtest: missing read-only adapter fails closed\nok 28 - missing read-only adapter fails closed\n  ---\n  duration_ms: 0.057833\n  type: 'test'\n  ...\n# Subtest: accepts a correctly hashed journal beginning at sequence zero\nok 29 - accepts a correctly hashed journal beginning at sequence zero\n  ---\n  duration_ms: 0.828834\n  type: 'test'\n  ...\n# Subtest: rejects a journal that does not begin at sequence zero\nok 30 - rejects a journal that does not begin at sequence zero\n  ---\n  duration_ms: 0.1715\n  type: 'test'\n  ...\n# Subtest: rejects nonce reuse across transition identities\nok 31 - rejects nonce reuse across transition identities\n  ---\n  duration_ms: 0.238375\n  type: 'test'\n  ...\n# Subtest: rejects altered event bytes when digest is not recomputed\nok 32 - rejects altered event bytes when digest is not recomputed\n  ---\n  duration_ms: 0.160708\n  type: 'test'\n  ...\n# OURPROCESSORSELF tests: PASS\n# Subtest: test/processor.test.mjs\nok 7 - test/processor.test.mjs\n  ---\n  duration_ms: 45.316125\n  type: 'test'\n  ...\n# Subtest: actuator rejects unauthorized UPDATE_REF before mutation\nok 34 - actuator rejects unauthorized UPDATE_REF before mutation\n  ---\n  duration_ms: 196.390875\n  type: 'test'\n  ...\n# Subtest: admitted UPDATE_REF mutates and independently reads back actual ref\nok 35 - admitted UPDATE_REF mutates and independently reads back actual ref\n  ---\n  duration_ms: 202.116667\n  type: 'test'\n  ...\n# Subtest: pre-state mismatch fails without mutation\nok 36 - pre-state mismatch fails without mutation\n  ---\n  duration_ms: 157.392583\n  type: 'test'\n  ...\n# Subtest: mutation acknowledgement without state change yields ACTUATOR_FAILED\nok 37 - mutation acknowledgement without state change yields ACTUATOR_FAILED\n  ---\n  duration_ms: 143.005333\n  type: 'test'\n  ...\n# Subtest: pressure: unknown surface is rejected\nok 38 - pressure: unknown surface is rejected\n  ---\n  duration_ms: 0.64325\n  type: 'test'\n  ...\n# Subtest: pressure: missing admission is rejected\nok 39 - pressure: missing admission is rejected\n  ---\n  duration_ms: 0.393875\n  type: 'test'\n  ...\n# Subtest: pressure: unauthorized transition is rejected\nok 40 - pressure: unauthorized transition is rejected\n  ---\n  duration_ms: 0.050334\n  type: 'test'\n  ...\n# Subtest: pressure: unbounded transition is rejected\nok 41 - pressure: unbounded transition is rejected\n  ---\n  duration_ms: 0.043458\n  type: 'test'\n  ...\n# Subtest: pressure: valid CPU transition is admitted and sealed\nok 42 - pressure: valid CPU transition is admitted and sealed\n  ---\n  duration_ms: 0.179958\n  type: 'test'\n  ...\n# Subtest: pressure: cache hit does not grant authority\nok 43 - pressure: cache hit does not grant authority\n  ---\n  duration_ms: 0.058292\n  type: 'test'\n  ...\n# Subtest: pressure: purge without admission is rejected\nok 44 - pressure: purge without admission is rejected\n  ---\n  duration_ms: 0.095041\n  type: 'test'\n  ...\n# Subtest: pressure: admitted purge produces a bounded plan\nok 45 - pressure: admitted purge produces a bounded plan\n  ---\n  duration_ms: 0.076875\n  type: 'test'\n  ...\n# Subtest: pressure: raw Git ref movement is not a machine transition\nok 46 - pressure: raw Git ref movement is not a machine transition\n  ---\n  duration_ms: 0.217333\n  type: 'test'\n  ...\n# Subtest: pressure: transition receipt binds pre/post repository state\nok 47 - pressure: transition receipt binds pre/post repository state\n  ---\n  duration_ms: 0.298708\n  type: 'test'\n  ...\n# Subtest: repository machine has seven semantic surfaces\nok 48 - repository machine has seven semantic surfaces\n  ---\n  duration_ms: 0.549917\n  type: 'test'\n  ...\n# Subtest: transition cannot bypass admission\nok 49 - transition cannot bypass admission\n  ---\n  duration_ms: 0.422542\n  type: 'test'\n  ...\n# Subtest: purge is an admitted state normalization plan, not deletion\nok 50 - purge is an admitted state normalization plan, not deletion\n  ---\n  duration_ms: 0.137\n  type: 'test'\n  ...\n# Subtest: publishes exact bytes and verifies content address on read-back\nok 51 - publishes exact bytes and verifies content address on read-back\n  ---\n  duration_ms: 19.16475\n  type: 'test'\n  ...\n# Subtest: same content publication is idempotent\nok 52 - same content publication is idempotent\n  ---\n  duration_ms: 15.100209\n  type: 'test'\n  ...\n# Subtest: rejects a caller-supplied key that does not match exact bytes\nok 53 - rejects a caller-supplied key that does not match exact bytes\n  ---\n  duration_ms: 1.85525\n  type: 'test'\n  ...\n# Subtest: rejects malformed content keys\nok 54 - rejects malformed content keys\n  ---\n  duration_ms: 1.353417\n  type: 'test'\n  ...\n# Subtest: detects on-disk byte tampering during get\nok 55 - detects on-disk byte tampering during get\n  ---\n  duration_ms: 11.66075\n  type: 'test'\n  ...\n# Subtest: does not claim host-crash or independent-custody durability\nok 56 - does not claim host-crash or independent-custody durability\n  ---\n  duration_ms: 1.513291\n  type: 'test'\n  ...\n# Subtest: does not silently provide an unbounded listing operation\nok 57 - does not silently provide an unbounded listing operation\n  ---\n  duration_ms: 1.647958\n  type: 'test'\n  ...\n# Subtest: descriptor binds host and failure domain identities\nok 58 - descriptor binds host and failure domain identities\n  ---\n  duration_ms: 2.346875\n  type: 'test'\n  ...\n# Subtest: rejects a symlink at a content-addressed object path\nok 59 - rejects a symlink at a content-addressed object path\n  ---\n  duration_ms: 3.283084\n  type: 'test'\n  ...\n# Subtest: rejects a group- or world-writable store root\nok 60 - rejects a group- or world-writable store root\n  ---\n  duration_ms: 0.8665\n  type: 'test'\n  ...\n# Subtest: accepts a structurally valid D1 runtime registration\nok 61 - accepts a structurally valid D1 runtime registration\n  ---\n  duration_ms: 0.6875\n  type: 'test'\n  ...\n# Subtest: rejects unknown runtime family and missing host identity\nok 62 - rejects unknown runtime family and missing host identity\n  ---\n  duration_ms: 0.108708\n  type: 'test'\n  ...\n# Subtest: D2 requires atomic no-replace and file plus namespace flush\nok 63 - D2 requires atomic no-replace and file plus namespace flush\n  ---\n  duration_ms: 0.647708\n  type: 'test'\n  ...\n# Subtest: D3 requires replication\nok 64 - D3 requires replication\n  ---\n  duration_ms: 0.096792\n  type: 'test'\n  ...\n# Subtest: D4 requires independently evidenced custody and witness\nok 65 - D4 requires independently evidenced custody and witness\n  ---\n  duration_ms: 0.176416\n  type: 'test'\n  ...\n# Subtest: does not authorize a conformant but unadmitted adapter for canonical writes\nok 66 - does not authorize a conformant but unadmitted adapter for canonical writes\n  ---\n  duration_ms: 0.120292\n  type: 'test'\n  ...\n# Subtest: does not downgrade D2 requirement to D1\nok 67 - does not downgrade D2 requirement to D1\n  ---\n  duration_ms: 0.138209\n  type: 'test'\n  ...\n# Subtest: recognizes Bubble, Cloudflare edge, Supabase projection and language runtimes\nok 68 - recognizes Bubble, Cloudflare edge, Supabase projection and language runtimes\n  ---\n  duration_ms: 0.065583\n  type: 'test'\n  ...\n# Subtest: v0.7 closes the real UPDATE_REF loop with verified Git read-back\nok 69 - v0.7 closes the real UPDATE_REF loop with verified Git read-back\n  ---\n  duration_ms: 209.150166\n  type: 'test'\n  ...\n# Subtest: v0.7 success closes the cycle and terminates on verified realization\nok 70 - v0.7 success closes the cycle and terminates on verified realization\n  ---\n  duration_ms: 0.851083\n  type: 'test'\n  ...\n# Subtest: v0.7 actuator failure stops without asserting a false actual state\nok 71 - v0.7 actuator failure stops without asserting a false actual state\n  ---\n  duration_ms: 0.154791\n  type: 'test'\n  ...\n# Subtest: v0.7 insufficient authority stops before execution\nok 72 - v0.7 insufficient authority stops before execution\n  ---\n  duration_ms: 0.072792\n  type: 'test'\n  ...\n# Subtest: v0.7 admission rejection stops before execution\nok 73 - v0.7 admission rejection stops before execution\n  ---\n  duration_ms: 0.097334\n  type: 'test'\n  ...\n# Subtest: v0.7 empty delta produces no proposal\nok 74 - v0.7 empty delta produces no proposal\n  ---\n  duration_ms: 0.110667\n  type: 'test'\n  ...\n1..74\n# tests 74\n# suites 0\n# pass 74\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 754.43025\n",
+    "stderr": ""
+  },
+  "schema_compilation": [
+    {
+      "schema": "SCHEMAS/ourdata-envelope.v1.schema.json",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "schema /var/folders/vw/6tcwnxxs2_jg1psbzgn_jsbr0000gn/T/ourselflow-runtime-storage-RWp0SG/data/SCHEMAS/ourdata-envelope.v1.schema.json is valid\n",
+      "stderr": "npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\nnpm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.\n"
+    },
+    {
+      "schema": "SCHEMAS/ourdata-transition.v1.schema.json",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "schema /var/folders/vw/6tcwnxxs2_jg1psbzgn_jsbr0000gn/T/ourselflow-runtime-storage-RWp0SG/data/SCHEMAS/ourdata-transition.v1.schema.json is valid\n",
+      "stderr": ""
+    },
+    {
+      "schema": "SCHEMAS/storage-adapter-registration.v1.schema.json",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "schema /var/folders/vw/6tcwnxxs2_jg1psbzgn_jsbr0000gn/T/ourselflow-runtime-storage-RWp0SG/data/SCHEMAS/storage-adapter-registration.v1.schema.json is valid\n",
+      "stderr": ""
+    }
+  ],
+  "host_runtime_inventory": {
+    "runtime_kind": "MACOS",
+    "host_architecture": "arm64",
+    "kernel": "27.0.0",
+    "node": "v22.23.0",
+    "executables": {
+      "docker": true,
+      "colima": true,
+      "limactl": true,
+      "qemu-system-aarch64": false,
+      "qemu-img": true,
+      "prlctl": false,
+      "podman": false,
+      "containerd": false,
+      "ollama": true
+    },
+    "available_storage_kib": "/dev/disk3s5   239362496 201288300  12431156    95% 1579155 124311560    1%   /System/Volumes/Data",
+    "container_runtime_observation": "FAIL",
+    "colima_observation": "FAIL",
+    "lima_observation": "PASS",
+    "ollama_observation": "FAIL"
+  },
+  "source_worktree_immutability": {
+    "method": "SHA-256 over sorted tracked and non-ignored untracked worktree file paths and exact file bytes; .git metadata excluded",
+    "processor_before": {
+      "sha256": "790f65d20a36fc8e793081bda087345007cf1be644f59264056f598735e9c91d",
+      "file_count": 83
+    },
+    "processor_after": {
+      "sha256": "790f65d20a36fc8e793081bda087345007cf1be644f59264056f598735e9c91d",
+      "file_count": 83
+    },
+    "data_before": {
+      "sha256": "acf672456e5cf7ef01c306c2382e609dc6cae664cd345282609aa28bc1e04bc8",
+      "file_count": 29
+    },
+    "data_after": {
+      "sha256": "acf672456e5cf7ef01c306c2382e609dc6cae664cd345282609aa28bc1e04bc8",
+      "file_count": 29
+    },
+    "processor_status_before": "6f406dcea079fa2d3d2403f70c42426dcb66380ed752807a5dc88e4395854a0b",
+    "processor_status_after": "6f406dcea079fa2d3d2403f70c42426dcb66380ed752807a5dc88e4395854a0b",
+    "data_status_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data_status_after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unchanged": true
+  },
+  "scope": {
+    "github_actions_used": false,
+    "main_mutated": false,
+    "source_worktrees_modified": false,
+    "global_install": false,
+    "repository_install": false,
+    "canonical_storage_provisioned": false,
+    "replication_performed": false,
+    "vm_disk_created": false,
+    "vm_booted": false
+  },
+  "temporary_root": "/var/folders/vw/6tcwnxxs2_jg1psbzgn_jsbr0000gn/T/ourselflow-runtime-storage-RWp0SG",
+  "receipt_sha256": "7ce9f0a28dbf0acd5dec320b213efdddd4369c9b903af873ab70ba74e3ea3600"
+}
