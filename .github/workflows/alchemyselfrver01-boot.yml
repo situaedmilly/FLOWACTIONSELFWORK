@@ -6,20 +6,60 @@ on:
 jobs:
   genesis-boot:
     runs-on: [self-hosted, linux, genesis]
+    environment: genesis-production
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - name: Authorize Genesis boot
+      - name: Checkout execution contract
+        uses: actions/checkout@v4
+
+      - name: Checkout canonical Genesis receipt repository
+        uses: actions/checkout@v4
+        with:
+          repository: situaedmilly/ourself-cloud-server-network
+          ref: feat/alchemyselfrver01-genesis-v0.1
+          token: ${{ secrets.OURSELF_RECEIPT_REPO_TOKEN }}
+          path: canonical-receipts
+
+      - name: Require explicit boot authorization and runtime bindings
         env:
-          GENESIS_AUTHORIZATION: OURSELF-AUTHORIZED-ALCHEMYSELFRVER01-BOOT-0001
-        run: test "$GENESIS_AUTHORIZATION" = "OURSELF-AUTHORIZED-ALCHEMYSELFRVER01-BOOT-0001"
-      - name: Execute Genesis runtime
+          GENESIS_BOOT_AUTHORIZATION: ${{ secrets.GENESIS_BOOT_AUTHORIZATION }}
+          GENESIS_ENDPOINT: ${{ secrets.GENESIS_ENDPOINT }}
+          OURSELF_COGNITION_BASE_URL: ${{ secrets.OURSELF_COGNITION_BASE_URL }}
+          OURSELF_MODEL_ID: ${{ vars.OURSELF_MODEL_ID }}
+          OURSELF_RECEIPT_REPO_TOKEN: ${{ secrets.OURSELF_RECEIPT_REPO_TOKEN }}
+        run: |
+          set -eu
+          test -n "$GENESIS_BOOT_AUTHORIZATION" || { echo "GENESIS_BOOT_AUTHORIZATION is required"; exit 1; }
+          test -n "$GENESIS_ENDPOINT" || { echo "GENESIS_ENDPOINT is required"; exit 1; }
+          test -n "$OURSELF_COGNITION_BASE_URL" || { echo "OURSELF_COGNITION_BASE_URL is required"; exit 1; }
+          test -n "$OURSELF_MODEL_ID" || { echo "OURSELF_MODEL_ID repository variable is required"; exit 1; }
+          test -n "$OURSELF_RECEIPT_REPO_TOKEN" || { echo "OURSELF_RECEIPT_REPO_TOKEN is required"; exit 1; }
+          test "$GENESIS_ENDPOINT" != "$OURSELF_COGNITION_BASE_URL" || { echo "Runtime and cognition endpoints must be distinct"; exit 1; }
+
+      - name: Execute and witness Genesis cognition crossing
         env:
+          GENESIS_ENDPOINT: ${{ secrets.GENESIS_ENDPOINT }}
+          OURSELF_COGNITION_BASE_URL: ${{ secrets.OURSELF_COGNITION_BASE_URL }}
+          OURSELF_MODEL_ID: ${{ vars.OURSELF_MODEL_ID }}
           GENESIS_REPO_DIR: "$GITHUB_WORKSPACE"
+          GENESIS_RECEIPT_PATH: "$GITHUB_WORKSPACE/canonical-receipts/genesis/receipts/ALCHEMYSELFRVER01-latest.json"
         run: node runtime/alchemyselfrver01-boot.mjs
-      - name: Publish execution receipt
+
+      - name: Commit receipt to canonical Genesis repository
+        working-directory: canonical-receipts
+        run: |
+          set -eu
+          test -s genesis/receipts/ALCHEMYSELFRVER01-latest.json
+          git config user.name "OURSELF Genesis Receipt Bot"
+          git config user.email "ourself-genesis-receipts@users.noreply.github.com"
+          git add genesis/receipts/ALCHEMYSELFRVER01-latest.json
+          git commit -m "Record witnessed ALCHEMYSELFRVER01 cognition crossing"
+          git push origin HEAD:feat/alchemyselfrver01-genesis-v0.1
+
+      - name: Publish independently addressable receipt artifact
         uses: actions/upload-artifact@v4
         with:
           name: ALCHEMYSELFRVER01-boot-receipt
-          path: genesis/receipts/ALCHEMYSELFRVER01-latest.json
+          path: canonical-receipts/genesis/receipts/ALCHEMYSELFRVER01-latest.json
+          if-no-files-found: error
