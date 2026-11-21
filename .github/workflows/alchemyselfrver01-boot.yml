@@ -13,14 +13,6 @@ jobs:
       - name: Checkout execution contract
         uses: actions/checkout@v4
 
-      - name: Checkout canonical Genesis receipt repository
-        uses: actions/checkout@v4
-        with:
-          repository: situaedmilly/ourself-cloud-server-network
-          ref: feat/alchemyselfrver01-genesis-v0.1
-          token: ${{ secrets.OURSELF_RECEIPT_REPO_TOKEN }}
-          path: canonical-receipts
-
       - name: Require explicit boot authorization and runtime bindings
         env:
           GENESIS_BOOT_AUTHORIZATION: ${{ secrets.GENESIS_BOOT_AUTHORIZATION }}
@@ -37,13 +29,21 @@ jobs:
           test -n "$OURSELF_RECEIPT_REPO_TOKEN" || { echo "OURSELF_RECEIPT_REPO_TOKEN is required"; exit 1; }
           test "$GENESIS_ENDPOINT" != "$OURSELF_COGNITION_BASE_URL" || { echo "Runtime and cognition endpoints must be distinct"; exit 1; }
 
+      - name: Checkout canonical Genesis receipt repository
+        uses: actions/checkout@v4
+        with:
+          repository: situaedmilly/ourself-cloud-server-network
+          ref: feat/alchemyselfrver01-genesis-v0.1
+          token: ${{ secrets.OURSELF_RECEIPT_REPO_TOKEN }}
+          path: canonical-receipts
+
       - name: Execute and witness Genesis cognition crossing
         env:
           GENESIS_ENDPOINT: ${{ secrets.GENESIS_ENDPOINT }}
           OURSELF_COGNITION_BASE_URL: ${{ secrets.OURSELF_COGNITION_BASE_URL }}
           OURSELF_MODEL_ID: ${{ vars.OURSELF_MODEL_ID }}
-          GENESIS_REPO_DIR: "$GITHUB_WORKSPACE"
-          GENESIS_RECEIPT_PATH: "$GITHUB_WORKSPACE/canonical-receipts/genesis/receipts/ALCHEMYSELFRVER01-latest.json"
+          GENESIS_REPO_DIR: ${{ github.workspace }}
+          GENESIS_RECEIPT_PATH: ${{ github.workspace }}/canonical-receipts/genesis/receipts/ALCHEMYSELFRVER01-latest.json
         run: node runtime/alchemyselfrver01-boot.mjs
 
       - name: Commit receipt to canonical Genesis repository
