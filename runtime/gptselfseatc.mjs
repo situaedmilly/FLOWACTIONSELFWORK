@@ -1,8 +1,10 @@
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
+import { bootProtocolSelfRegistry } from "./protocolself-registry.mjs";
 
 const dispatchPath = new URL("../dispatch/PULL-0003.json", import.meta.url);
 const dispatch = JSON.parse(await fs.readFile(dispatchPath, "utf8"));
+const protocolselfBoot = bootProtocolSelfRegistry();
 
 const receipt = {
   receipt_id: "RECEIPT-GPTSELFSEATC-BOOT-0003",
@@ -12,6 +14,7 @@ const receipt = {
   pull_id: dispatch.pull_id,
   gate_id: dispatch.gate_id,
   status: "BOOTED_READY",
+  protocolself_registry: protocolselfBoot,
   authority: dispatch.authority,
   execution_claim: false,
   next_required_transition: "RECEIVE_POLL-0003",
